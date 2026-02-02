@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGHBKCVL0"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-LVGHBKCVL0');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graduate Planning Group - 頂尖大學推甄與留學戰略夥伴</title>
+    <meta name="description" content="GPG 提供台政頂大推甄與歐美名校留學申請的雙軌戰略諮詢。不做流水線代辦，我們是你的生涯策略合夥人。">
+    <meta name="theme-color" content="#fdfdfd">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@300;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gpg-navy': '#16284d',
+                        'gpg-gold': '#C5A059',
+                        'gpg-cream': '#F0EAD6',
+                        'gpg-text': '#1C2B39',
+                        'gpg-light': '#F9F9F9',
+                        'gpg-gray-bg': '#F4F6F8',
+                        'gpg-gray': '#64748b',
+                    },
+                    fontFamily: {
+                        brand: ['"Cinzel"', 'serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'widest-plus': '0.2em',
+                    },
+                    backgroundImage: {
+                        'hero-bg': "url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fdfdfd; color: #1C2B39; }
+        h1, h2, h3, h4 { font-family: 'Noto Serif TC', serif; }
+        
+        .reveal-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.2s; }
+        .reveal-delay-2 { transition-delay: 0.4s; }
+
+        .nav-logo { height: 90px; width: auto; } 
+        .footer-logo { height: 90px; width: auto; }
+        @media (max-width: 768px) { .nav-logo { height: 60px; } .footer-logo { height: 50px; } }
+
+        .text-gradient-gold {
+            background: linear-gradient(to right, #C5A059, #E0C38C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Logo Card Style */
+        .logo-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            padding: 1.5rem;
+            border: 1px solid #E2E8F0;
+            border-radius: 0.25rem;
+            transition: all 0.3s ease;
+            height: 140px;
+            position: relative;
+            overflow: hidden;
+        }
+        .logo-card:hover {
+            transform: translateY(-5px);
+            border-color: #C5A059;
+            box-shadow: 0 10px 30px -10px rgba(11, 28, 52, 0.15);
+        }
+        .logo-img {
+            max-width: 80%;
+            max-height: 60px;
+            object-fit: contain;
+            margin-bottom: 0.5rem;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        .logo-card:hover .logo-img {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        .logo-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #94a3b8;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+        .logo-card:hover .logo-label {
+            color: #16284d;
+        }
+
+        /* Calendly RWD */
+        .calendly-inline-widget { min-width:320px; height:700px; }
+    </style>
+</head>
+<body class="antialiased selection:bg-gpg-navy selection:text-gpg-gold">
+
+    <nav class="fixed w-full z-50 border-b border-gray-200/50 transition-all duration-300 bg-[#fdfdfd] backdrop-blur-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-32">
+                
+                <a href="index.html" class="flex items-center group relative z-50 py-1">
+                    <img src="Logo 2.png" alt="Graduate Planning Group" class="nav-logo object-contain transition transform group-hover:scale-105 duration-300">
+                </a>
+                
+                <div class="hidden lg:flex space-x-1 text-sm font-bold tracking-wide items-center text-gpg-navy relative z-50">
+                    <a href="is-business-right-for-me.html" class="flex items-center text-gpg-gray hover:text-gpg-navy hover:bg-gray-100 transition py-2 px-4 rounded-sm group">
+                        <i data-lucide="compass" class="w-4 h-4 mr-2 text-gpg-gold"></i>
+                        適性落點診斷
+                    </a>
+                    
+                    <a href="mentors.html" class="hover:text-gpg-gold transition py-6 px-3">顧問陣容</a>
+                    <a href="results.html" class="hover:text-gpg-gold transition py-6 px-3">錄取榜單</a>
+                    
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">
+                            服務項目 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-64 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="services.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="block font-bold">國內頂大推甄</span>
+                                <span class="text-xs text-gray-400">台大財金、商研、國企</span>
+                            </a>
+                            <a href="overseas.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100 relative">
+                                <span class="block font-bold text-gpg-gold">海外留學申請 <span class="bg-gpg-navy text-white text-[9px] px-1.5 py-0.5 rounded ml-1">NEW</span></span>
+                                <span class="text-xs text-gray-400">Oxford, UPenn, Ivy League</span>
+                            </a>
+                            <a href="intern.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">實習職涯諮詢</span>
+                                <span class="text-xs text-gray-400">履歷精修、模擬面試</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">
+                            獨家資源 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-56 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="faq.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="block font-bold">推甄百科 FAQ</span>
+                            </a>
+                            <a href="resources.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">精選乾貨文章</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="pl-4 ml-2 border-l border-gray-300">
+                        <a href="#contact" class="bg-gpg-navy text-white px-6 py-2.5 rounded-sm text-sm font-brand tracking-wider hover:bg-gpg-gold transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            CONSULT
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gpg-navy hover:text-gpg-gold focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-32 left-0 w-full border-b border-gray-200 shadow-xl h-[calc(100vh-128px)] overflow-y-auto z-40" style="background-color: #fdfdfd;">
+            <div class="flex flex-col p-6 space-y-6">
+                <a href="is-business-right-for-me.html" class="text-xl font-bold text-gpg-navy flex items-center py-2 border-b border-gray-300/50"><i data-lucide="compass" class="w-6 h-6 mr-2 text-gpg-gold"></i> 適性落點診斷</a>
+                <a href="mentors.html" class="block text-lg font-bold text-gray-700">顧問陣容</a>
+                <a href="results.html" class="block text-lg font-bold text-gray-700">錄取榜單</a>
+                
+                <div class="border-l-4 border-gpg-gold pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Services</span>
+                    <a href="services.html" class="block text-lg font-bold text-gray-700 mb-2">國內推甄服務</a>
+                    <a href="overseas.html" class="block text-lg font-bold text-gpg-gold mb-2">海外留學申請</a>
+                    <a href="intern.html" class="block text-lg font-bold text-gray-700">實習諮詢</a>
+                </div>
+
+                <div class="border-l-4 border-gray-300 pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Resources</span>
+                    <a href="faq.html" class="block text-lg font-bold text-gpg-navy mb-2">推甄百科 FAQ</a>
+                    <a href="resources.html" class="block text-lg font-bold text-gray-700">精選乾貨文章</a>
+                </div>
+
+                <a href="#contact" class="block w-full bg-gpg-navy text-white text-center py-4 rounded-sm font-bold shadow-lg mt-4">立即預約免費評估</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative min-h-[90vh] flex items-center pt-32 lg:pt-0">
+        <div class="absolute inset-0 bg-hero-bg bg-cover bg-center"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-gpg-navy/95 via-gpg-navy/80 to-transparent"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full flex items-center">
+            <div class="w-full lg:w-3/5 py-16 lg:py-24">
+                <span class="inline-block border border-gpg-gold/50 bg-gpg-navy/50 backdrop-blur-md text-gpg-gold font-brand font-bold tracking-widest-plus text-xs uppercase px-4 py-2 rounded-full mb-8 reveal-up">
+                    Elite Admissions Consulting
+                </span>
+                <h1 class="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-white mb-8 leading-tight reveal-up reveal-delay-1">
+                    台灣推甄・海外留學<br>
+                    <span class="text-gradient-gold">頂尖名校全方位佈局</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 leading-relaxed mb-10 max-w-2xl font-light reveal-up reveal-delay-2">
+                    GPG 打破國內外升學的界線。由台大財金、國企、商研榜首，以及牛津、賓大錄取者組成的頂尖團隊。無論目標是台政商管還是歐美名校，我們都將為你打造最具競爭力的雙軌申請策略。
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5 reveal-up reveal-delay-2">
+                    <a href="#contact" class="inline-flex items-center justify-center px-10 py-4 bg-gpg-gold text-white font-bold rounded-sm hover:bg-white hover:text-gpg-navy transition-all duration-300 shadow-lg tracking-widest font-brand">
+                        免費落點評估 <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                    </a>
+                    <a href="mentors.html" class="inline-flex items-center justify-center px-10 py-4 border border-white text-white font-bold rounded-sm hover:bg-white hover:text-gpg-navy transition-all duration-300 tracking-widest font-brand">
+                        認識顧問團隊
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="py-20 bg-white border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-100">
+                <div class="reveal-up">
+                    <span class="block text-5xl font-bold text-gpg-navy mb-2 font-brand">100%</span>
+                    <span class="text-gray-400 text-xs tracking-widest uppercase font-bold">台政商管錄取率</span>
+                </div>
+                <div class="reveal-up reveal-delay-1">
+                    <span class="block text-5xl font-bold text-gpg-navy mb-2 font-brand">Top 20</span>
+                    <span class="text-gray-400 text-xs tracking-widest uppercase font-bold">歐美名校主攻目標</span>
+                </div>
+                <div class="reveal-up">
+                    <span class="block text-5xl font-bold text-gpg-navy mb-2 font-brand">100%</span>
+                    <span class="text-gray-400 text-xs tracking-widest uppercase font-bold">顧問具備頂尖碩士學歷</span>
+                </div>
+                <div class="reveal-up reveal-delay-1">
+                    <span class="block text-5xl font-bold text-gpg-navy mb-2 font-brand">1:1</span>
+                    <span class="text-gray-400 text-xs tracking-widest uppercase font-bold">深度客製化輔導</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-gpg-gray-bg relative overflow-hidden" id="services">
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20 reveal-up">
+                <span class="text-gpg-gold font-bold tracking-widest text-sm uppercase mb-4 block font-brand">Our Core Expertise</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-gpg-navy mb-8">國內外雙軌並行策略</h2>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    小朋友才做選擇。GPG 獨創的雙軌制，協助你在大四同步準備台政推甄與海外名校申請,最大化你的選擇權與成功率。
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-stretch relative mb-12">
+                <div class="bg-white p-10 rounded-2xl shadow-xl border-t-4 border-gpg-navy flex flex-col relative overflow-hidden group reveal-up">
+                    <div class="absolute top-0 right-0 opacity-10 transform rotate-12 group-hover:scale-110 transition-transform duration-700">
+                        <i data-lucide="landmark" class="w-64 h-64 text-gpg-navy"></i>
+                    </div>
+                    <div class="relative z-10 mb-8">
+                        <span class="inline-block py-2 px-4 bg-gpg-navy/10 text-gpg-navy text-sm font-bold rounded-full mb-6">Track A: Domestic</span>
+                        <h3 class="text-3xl font-serif font-bold text-gpg-navy mb-6">國內頂大推甄</h3>
+                        <p class="text-gray-600 leading-relaxed mb-8">針對台大、政大、清交商管學院的特殊要求,提供從研究計畫撰寫到高強度模擬面試的全方位輔導。</p>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-center text-gpg-navy font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-gpg-gold mr-3"></i> 學術研究計畫指導</li>
+                            <li class="flex items-center text-gpg-navy font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-gpg-gold mr-3"></i> 考古題模擬面試</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto relative z-10">
+                        <a href="services.html" class="block w-full py-4 bg-gpg-navy text-white text-center font-bold rounded-sm hover:bg-gpg-gold transition-colors">探索國內方案</a>
+                    </div>
+                </div>
+
+                <div class="bg-gpg-navy p-10 rounded-2xl shadow-xl border-t-4 border-gpg-gold flex flex-col relative overflow-hidden group reveal-up reveal-delay-1">
+                    <div class="absolute top-0 right-0 opacity-10 transform rotate-12 group-hover:scale-110 transition-transform duration-700">
+                        <i data-lucide="globe-2" class="w-64 h-64 text-white"></i>
+                    </div>
+                    <div class="relative z-10 mb-8 text-white">
+                        <span class="inline-block py-2 px-4 bg-white/10 text-gpg-gold text-sm font-bold rounded-full mb-6">Track B: Global</span>
+                        <h3 class="text-3xl font-serif font-bold text-white mb-6">海外名校留學</h3>
+                        <p class="text-gray-300 leading-relaxed mb-8">鎖定英美 G5/M7/Ivy League 等頂尖院校。我們提供選校定位、文書精修與外籍顧問潤飾服務。</p>
+                        <ul class="space-y-4 mb-10">
+                            <li class="flex items-center text-white font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-gpg-gold mr-3"></i> 職涯導向 SOP 挖掘</li>
+                            <li class="flex items-center text-white font-medium"><i data-lucide="check-circle" class="w-5 h-5 text-gpg-gold mr-3"></i> Native Speaker 潤飾</li>
+                        </ul>
+                    </div>
+                    <div class="mt-auto relative z-10">
+                        <a href="overseas.html" class="block w-full py-4 bg-gpg-gold text-white text-center font-bold rounded-sm hover:bg-white hover:text-gpg-navy transition-colors">探索海外方案</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white p-10 rounded-2xl shadow-lg border-l-8 border-gpg-gold relative overflow-hidden group reveal-up">
+                <div class="absolute right-0 bottom-0 opacity-5 transform translate-x-10 translate-y-10 group-hover:scale-110 transition-transform duration-500">
+                    <i data-lucide="briefcase" class="w-48 h-48 text-gpg-text"></i>
+                </div>
+                <div class="flex flex-col md:flex-row items-center gap-8 relative z-10">
+                    <div class="flex-1">
+                        <span class="inline-block py-1 px-3 bg-gray-100 text-gray-500 text-xs font-bold rounded-full mb-4">Track C: Career</span>
+                        <h3 class="text-2xl font-serif font-bold text-gpg-navy mb-4">實習職涯諮詢</h3>
+                        <p class="text-gray-600 mb-6">履歷總是被已讀不回？面試總是卡在最後一關？由外商 MA 與科技業 PM 帶你進行履歷健檢與模擬面試,讓你在申請季前就擁有強大的實戰背景。</p>
+                        <a href="intern.html" class="text-gpg-navy font-bold hover:text-gpg-gold transition flex items-center">
+                            了解實習輔導詳情 <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <div class="w-full md:w-1/3">
+                         <div class="grid grid-cols-2 gap-4 opacity-70">
+                            <div class="bg-gray-50 p-4 rounded text-center font-bold text-gray-400 text-xs">BCG</div>
+                            <div class="bg-gray-50 p-4 rounded text-center font-bold text-gray-400 text-xs">Shopee</div>
+                            <div class="bg-gray-50 p-4 rounded text-center font-bold text-gray-400 text-xs">Google</div>
+                            <div class="bg-gray-50 p-4 rounded text-center font-bold text-gray-400 text-xs">P&G</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <span class="text-gpg-gold font-bold tracking-widest text-xs uppercase mb-4 block font-brand">Proven Track Record</span>
+            <h2 class="text-3xl font-bold text-gpg-navy mb-12">顧問團隊實戰經歷</h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 reveal">
+                <div class="logo-card group">
+                    <img src="BCG logo.png" alt="BCG" class="logo-img"  style="transform: scale(0.7);">
+                    <span class="logo-label">BCG</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="WQ logo.png" alt="WorldQuant" class="logo-img" style="transform: scale(1.5);">
+                    <span class="logo-label">WorldQuant</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="Shopee.png" alt="Shopee" class="logo-img">
+                    <span class="logo-label">Shopee</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="AZ logo.png" alt="AstraZeneca" class="logo-img">
+                    <span class="logo-label">AstraZeneca</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="TEJ.png" alt="TEJ" class="logo-img">
+                    <span class="logo-label">TEJ</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="RGA logo.png" alt="RGA" class="logo-img">
+                    <span class="logo-label">RGA</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="KPMG logo.png" alt="KPMG" class="logo-img">
+                    <span class="logo-label">KPMG</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="Fubon_Group.svg.png" alt="Fubon" class="logo-img">
+                    <span class="logo-label">富邦金控</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="資訊科學所 logo.png" alt="IIS" class="logo-img">
+                    <span class="logo-label">中研院 資訊所</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="統計科學所 logo.png" alt="ISS" class="logo-img">
+                    <span class="logo-label">中研院 統計所</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="HPE.png" alt="HPE" class="logo-img">
+                    <span class="logo-label">HPE</span>
+                </div>
+                <div class="logo-card group">
+                    <img src="CTBC.png" alt="CTBC" class="logo-img">
+                    <span class="logo-label">中國信託</span>
+                </div>
+            </div>
+            
+            <div class="mt-12">
+                <a href="intern.html" class="text-sm font-bold text-gray-400 hover:text-gpg-navy transition">
+                    查看實習諮詢服務 &rarr;
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 bg-gradient-to-br from-gpg-navy to-[#0f172a] relative overflow-hidden">
+        <div class="absolute inset-0 bg-hero-pattern opacity-10"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-gpg-gold/20 rounded-full filter blur-[128px] -translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10 reveal-up">
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-8 leading-tight">
+                別讓資訊落差<br>成為你的阻礙
+            </h2>
+            <p class="text-xl text-blue-200 mb-12 max-w-2xl mx-auto leading-relaxed">
+                預約一次 45 分鐘的深度落點評估,讓 GPG 的資深顧問為你解析現狀,制定專屬的雙軌申請藍圖。
+            </p>
+            
+            <div class="bg-white rounded-xl shadow-2xl overflow-hidden max-w-3xl mx-auto border border-gray-700/50">
+                <div class="calendly-inline-widget" data-url="https://calendly.com/albertchen0227/30min?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>
+                <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            </div>
+
+            <p class="text-blue-300 mt-8 text-sm">
+                * 預約成功後,系統將自動發送 Google Meet 會議連結至您的信箱。
+            </p>
+        </div>
+    </section>
+
+    <footer class="bg-gpg-navy text-white py-20 border-t border-gpg-gold/20 font-sans">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="space-y-8">
+                    <a href="index.html" class="block w-fit"><img src="Logo 1.png" alt="Graduate Planning Group" class="footer-logo object-contain"></a>
+                    <div class="text-gray-400 text-sm leading-8 text-justify border-l-2 border-gpg-gold/40 pl-6">
+                        <p class="mb-6 font-light opacity-90">「在追求頂尖的路上,孤獨是常態,但你不必獨自摸索。從台大管院到歐美名校,我們走過你要走的路,也犯過你可能會犯的錯。」</p>
+                        <p class="text-white font-medium"><span class="text-gpg-gold">Graduate Planning Group</span> 不做流水線的代辦,我們做你的「戰略合夥人」。陪你把學歷的天花板,變成職涯的起跑點。</p>
+                    </div>
+                </div>
+                <div class="lg:pl-12 pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Quick Links</h3>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="results.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 2025 最新榜單</a></li>
+                        <li><a href="mentors.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 顧問團隊介紹</a></li>
+                        <li><a href="intern.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 實習諮詢</a></li>
+                        <li><a href="services.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 服務方案與價格</a></li>
+                        <li><a href="faq.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 推甄百科 FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Contact Us</h3>
+                    <div class="space-y-6 text-sm text-gray-400">
+                        <p class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 國立臺灣大學 管理學院<br>106 台北市大安區羅斯福路四段1號</p>
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> <a href="mailto:contact@gpg-consulting.com" class="hover:text-white transition">contact@gpg-consulting.com</a></p>
+                        <p class="flex items-center"><i data-lucide="message-circle" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 官方 LINE ID: @gpg_consulting</p>
+                    </div>
+                    <div class="mt-10">
+                        <h4 class="text-xs font-bold text-gray-500 mb-4">FOLLOW US</h4>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800/50 mt-16 pt-8 text-center md:text-left text-xs text-gray-500">
+                <p>&copy; 2025 Graduate Planning Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+        }
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>

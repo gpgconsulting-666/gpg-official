@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顧問團隊 - Graduate Planning Group</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gpg-navy': '#16284d',
+                        'gpg-gold': '#C5A059',
+                        'gpg-cream': '#F0EAD6',
+                        'gpg-text': '#1C2B39',
+                        'gpg-light': '#F9F9F9',
+                        'gpg-gray-bg': '#F4F6F8',
+                        'gpg-gray': '#64748b',
+                    },
+                    fontFamily: {
+                        brand: ['"Cinzel"', 'serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #f9f9f9; 
+            color: #1a1a1a; 
+        }
+        h1, h2, h3 { 
+            font-family: 'Noto Serif TC', serif; 
+        }
+        
+        /* --- 卡片樣式 --- */
+        .mentor-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mentor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.1);
+            border-color: #C5A059;
+        }
+
+        .mentor-name {
+            position: relative;
+            display: inline-block;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        .mentor-card:hover .mentor-name {
+            border-color: #16284d;
+        }
+        
+        .mentor-avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 12px;
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 1px solid #f3f4f6;
+        }
+
+        /* --- Modal 樣式 (針對需求大幅調整) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(22, 40, 77, 0.6); /* 稍微深一點的背景增加對比 */
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 24px; /* 更大的圓角 */
+            max-width: 900px; /* 加寬寬度以容納左右排版 */
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+        
+        /* Modal 內的大頭貼樣式 (參考圖樣式) */
+        .modal-profile-img {
+            width: 280px;
+            height: 280px;
+            border-radius: 32px; /* 特殊的圓角矩形 */
+            object-fit: cover;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modal 內的標籤樣式 (參考圖樣式: 線框風格) */
+        .bcg-tag {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border: 1px solid #4b5563; /* 深灰框 */
+            background-color: white;
+            color: #374151;
+            border-radius: 8px; /* 較小的圓角 */
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            transition: all 0.2s;
+            cursor: default;
+        }
+        
+        .bcg-tag:hover {
+            background-color: #f3f4f6;
+            border-color: #1f2937;
+        }
+
+        /* 響應式調整 */
+        @media (max-width: 768px) {
+            .modal-content {
+                max-width: 100%;
+                border-radius: 0;
+                height: 100%;
+                max-height: 100%;
+            }
+            .modal-profile-img {
+                width: 160px;
+                height: 160px;
+            }
+        }
+        
+        .nav-logo { height: 90px; width: auto; } 
+        .footer-logo { height: 90px; width: auto; }
+        
+        @media (max-width: 768px) {
+            .nav-logo { height: 60px; }
+            .footer-logo { height: 50px; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gpg-navy selection:text-gpg-gold">
+
+    <nav class="fixed w-full z-50 border-b border-gray-200/50 transition-all duration-300" id="navbar" style="background-color: #fdfdfd;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-32">
+                <a href="index.html" class="flex items-center group relative z-50 py-1">
+                    <img src="Logo 2.png" alt="Graduate Planning Group" class="nav-logo object-contain transition transform group-hover:scale-105 duration-300">
+                </a>
+                <div class="hidden lg:flex space-x-1 text-sm font-bold tracking-wide items-center text-gpg-navy relative z-50">
+                    <a href="is-business-right-for-me.html" class="flex items-center text-gpg-gray hover:text-gpg-navy hover:bg-gray-100 transition py-2 px-4 rounded-sm group"><i data-lucide="compass" class="w-4 h-4 mr-2 text-gpg-gold"></i> 適性落點診斷</a>
+                    <a href="mentors.html" class="text-gpg-navy font-bold border-b-2 border-gpg-gold/20 transition py-6 px-3">顧問陣容</a>
+                    <a href="results.html" class="hover:text-gpg-gold transition py-6 px-3">錄取榜單</a>
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">服務項目 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i></button>
+                        <div class="absolute left-0 top-full w-64 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="services.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100"><span class="block font-bold">國內頂大推甄</span><span class="text-xs text-gray-400">台大財金、商研、國企</span></a>
+                            <a href="overseas.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100 relative"><span class="block font-bold text-gpg-gold">海外留學申請 <span class="bg-gpg-navy text-white text-[9px] px-1.5 py-0.5 rounded ml-1">NEW</span></span><span class="text-xs text-gray-400">Oxford, UPenn, Ivy League</span></a>
+                            <a href="intern.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition"><span class="block font-bold">實習職涯諮詢</span><span class="text-xs text-gray-400">履歷精修、模擬面試</span></a>
+                        </div>
+                    </div>
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">獨家資源 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i></button>
+                        <div class="absolute left-0 top-full w-56 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="faq.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100"><span class="block font-bold">推甄百科 FAQ</span></a>
+                            <a href="resources.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition"><span class="block font-bold">精選乾貨文章</span></a>
+                        </div>
+                    </div>
+                    <div class="pl-4 ml-2 border-l border-gray-300">
+                        <a href="index.html#contact" class="bg-gpg-navy text-white px-6 py-2.5 rounded-sm text-sm font-brand tracking-wider hover:bg-gpg-gold transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">CONSULT</a>
+                    </div>
+                </div>
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gpg-navy hover:text-gpg-gold focus:outline-none"><i data-lucide="menu" class="w-8 h-8"></i></button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-32 left-0 w-full border-b border-gray-200 shadow-xl h-[calc(100vh-128px)] overflow-y-auto z-40" style="background-color: #fdfdfd;">
+            <div class="flex flex-col p-6 space-y-6">
+                <a href="is-business-right-for-me.html" class="text-xl font-bold text-gpg-navy flex items-center py-2 border-b border-gray-300/50"><i data-lucide="compass" class="w-6 h-6 mr-2 text-gpg-gold"></i> 適性落點診斷</a>
+                <a href="mentors.html" class="block text-lg font-bold text-gpg-navy">顧問陣容</a>
+                <a href="results.html" class="block text-lg font-bold text-gray-700">錄取榜單</a>
+                <div class="border-l-4 border-gpg-gold pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Services</span>
+                    <a href="services.html" class="block text-lg font-bold text-gray-700 mb-2">國內推甄服務</a>
+                    <a href="overseas.html" class="block text-lg font-bold text-gpg-gold mb-2">海外留學申請</a>
+                    <a href="intern.html" class="block text-lg font-bold text-gray-700">實習諮詢</a>
+                </div>
+                <div class="border-l-4 border-gray-300 pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Resources</span>
+                    <a href="faq.html" class="block text-lg font-bold text-gpg-navy mb-2">推甄百科 FAQ</a>
+                    <a href="resources.html" class="block text-lg font-bold text-gray-700">精選乾貨文章</a>
+                </div>
+                <a href="index.html#contact" class="block w-full bg-gpg-navy text-white text-center py-4 rounded-sm font-bold shadow-lg mt-4">立即預約免費評估</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-40 pb-20 bg-gpg-gray-bg text-center px-6 min-h-[40vh] flex items-center justify-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block py-1 px-3 rounded-full bg-white border border-gpg-gold text-gpg-gold text-xs font-bold tracking-widest uppercase mb-6 shadow-sm font-brand">Elite Advisory Team</span>
+            <h1 class="text-4xl md:text-6xl font-bold text-gpg-navy mb-8 font-brand">Meet Our Consultants</h1>
+            <p class="text-gray-600 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                我們來自<span class="text-gpg-navy font-bold border-b border-gpg-gold/50">台大管院與世界頂尖名校</span>，以最高的學術規格，為你領航。
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="mentor-card group" onclick="openModal('albert')">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Albert" class="mentor-avatar">
+                    <div class="flex flex-col h-full justify-between w-full">
+                        <div>
+                            <h3 class="text-xl font-serif font-bold text-gpg-navy mb-1 leading-tight mentor-name">Albert</h3>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-2">Consultant</p>
+                            <p class="text-gray-700 text-sm font-medium mb-1">台大財金所</p>
+                            <p class="text-gray-400 text-xs">Taipei, Taiwan</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-100 w-full flex justify-between items-center">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gpg-gray group-hover:text-gpg-gold transition-colors"></i>
+                            <span class="text-[10px] font-bold text-gpg-navy opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">View Profile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card group" onclick="openModal('andy')">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Andy" class="mentor-avatar">
+                    <div class="absolute top-0 right-0"><span class="bg-gpg-navy text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg">TOP TIER</span></div>
+                    <div class="flex flex-col h-full justify-between w-full">
+                        <div>
+                            <h3 class="text-xl font-serif font-bold text-gpg-navy mb-1 leading-tight mentor-name">Andy</h3>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-2">Senior Partner</p>
+                            <p class="text-gray-700 text-sm font-medium mb-1">UPenn DS</p>
+                            <p class="text-gray-400 text-xs">Philadelphia, USA</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-100 w-full flex justify-between items-center">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gpg-gray group-hover:text-gpg-gold transition-colors"></i>
+                            <span class="text-[10px] font-bold text-gpg-navy opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">View Profile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mentor-card group" onclick="openModal('annie')">
+                    <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Annie" class="mentor-avatar">
+                    <div class="flex flex-col h-full justify-between w-full">
+                        <div>
+                            <h3 class="text-xl font-serif font-bold text-gpg-navy mb-1 leading-tight mentor-name">Annie</h3>
+                            <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-2">Consultant</p>
+                            <p class="text-gray-700 text-sm font-medium mb-1">台大國企所</p>
+                            <p class="text-gray-400 text-xs">Taipei, Taiwan</p>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-100 w-full flex justify-between items-center">
+                            <i data-lucide="arrow-right" class="w-4 h-4 text-gpg-gray group-hover:text-gpg-gold transition-colors"></i>
+                            <span class="text-[10px] font-bold text-gpg-navy opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">View Profile</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="modal-albert" class="modal" onclick="closeModal('albert')">
+        <div class="modal-content p-8 md:p-12" onclick="event.stopPropagation()">
+            <button class="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition z-10" onclick="closeModal('albert')">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-start">
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                     alt="Albert" 
+                     class="modal-profile-img flex-shrink-0">
+                
+                <div class="flex-1 pt-2 w-full">
+                    <h2 class="text-5xl md:text-6xl font-sans font-normal text-gpg-navy mb-4 tracking-tight leading-none">Albert<br>Chen</h2>
+                    
+                    <div class="space-y-1 mb-6">
+                        <p class="text-xl text-gray-800 font-medium">Lead Consultant, Quantitative Finance</p>
+                        <p class="text-lg text-gray-500">Taipei, Taiwan</p>
+                    </div>
+
+                    <a href="#" class="inline-block text-gray-400 hover:text-[#0a66c2] transition-colors mb-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+
+                    <div class="mt-auto">
+                         <div class="flex flex-wrap gap-2">
+                             <span class="bcg-tag">Quantitative Finance</span>
+                             <span class="bcg-tag">Machine Learning</span>
+                             <span class="bcg-tag">Python</span>
+                             <span class="bcg-tag">Risk Management</span>
+                             <span class="bcg-tag">Algo Trading</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-andy" class="modal" onclick="closeModal('andy')">
+        <div class="modal-content p-8 md:p-12" onclick="event.stopPropagation()">
+            <button class="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition z-10" onclick="closeModal('andy')">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-start">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                     alt="Andy" 
+                     class="modal-profile-img flex-shrink-0">
+                
+                <div class="flex-1 pt-2 w-full">
+                    <h2 class="text-5xl md:text-6xl font-sans font-normal text-gpg-navy mb-4 tracking-tight leading-none">Andy<br>Wu</h2>
+                    
+                    <div class="space-y-1 mb-6">
+                        <p class="text-xl text-gray-800 font-medium">Senior Consultant, Data Science</p>
+                        <p class="text-lg text-gray-500">Philadelphia, USA</p>
+                    </div>
+
+                    <a href="#" class="inline-block text-gray-400 hover:text-[#0a66c2] transition-colors mb-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+
+                    <div class="mt-auto">
+                         <div class="flex flex-wrap gap-2">
+                             <span class="bcg-tag">Data Science</span>
+                             <span class="bcg-tag">Consulting</span>
+                             <span class="bcg-tag">ESG Analytics</span>
+                             <span class="bcg-tag">Machine Learning</span>
+                             <span class="bcg-tag">Python / R</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-annie" class="modal" onclick="closeModal('annie')">
+        <div class="modal-content p-8 md:p-12" onclick="event.stopPropagation()">
+            <button class="absolute top-6 right-6 text-gray-400 hover:text-gray-800 transition z-10" onclick="closeModal('annie')">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-start">
+                <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" 
+                     alt="Annie" 
+                     class="modal-profile-img flex-shrink-0">
+                
+                <div class="flex-1 pt-2 w-full">
+                    <h2 class="text-5xl md:text-6xl font-sans font-normal text-gpg-navy mb-4 tracking-tight leading-none">Annie<br>Heish</h2>
+                    
+                    <div class="space-y-1 mb-6">
+                        <p class="text-xl text-gray-800 font-medium">Managing Director</p>
+                        <p class="text-lg text-gray-500">Taipei, Taiwan</p>
+                    </div>
+
+                    <a href="#" class="inline-block text-gray-400 hover:text-[#0a66c2] transition-colors mb-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+
+                    <div class="mt-auto">
+                         <div class="flex flex-wrap gap-2">
+                             <span class="bcg-tag">Business Strategy</span>
+                             <span class="bcg-tag">Marketing</span>
+                             <span class="bcg-tag">Pharma</span>
+                             <span class="bcg-tag">Strategic Planning</span>
+                             <span class="bcg-tag">Data-Driven Decision</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gpg-navy text-white py-20 border-t border-gpg-gold/20 font-sans">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="space-y-8">
+                    <a href="index.html" class="block w-fit">
+                         <img src="Logo 1.png" alt="Graduate Planning Group" class="footer-logo object-contain">
+                    </a>
+                    <div class="text-gray-400 text-sm leading-8 text-justify border-l-2 border-gpg-gold/40 pl-6">
+                        <p class="mb-6 font-light opacity-90">
+                            「在追求頂尖的路上，孤獨是常態，但你不必獨自摸索。從台大管院到歐美名校，我們走過你要走的路，也犯過你可能會犯的錯。」
+                        </p>
+                        <p class="text-white font-medium">
+                            <span class="text-gpg-gold">Graduate Planning Group</span> 不做流水線的代辦，我們做你的「戰略合夥人」。陪你把學歷的天花板，變成職涯的起跑點。
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:pl-12 pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Quick Links</h3>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="results.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 2025 最新榜單</a></li>
+                        <li><a href="mentors.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 顧問團隊介紹</a></li>
+                        <li><a href="intern.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 實習諮詢</a></li>
+                        <li><a href="services.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 服務方案與價格</a></li>
+                        <li><a href="faq.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 推甄百科 FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Contact Us</h3>
+                    <div class="space-y-6 text-sm text-gray-400">
+                        <p class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 國立臺灣大學 管理學院<br>106 台北市大安區羅斯福路四段1號</p>
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> <a href="mailto:contact@gpg-consulting.com" class="hover:text-white transition">contact@gpg-consulting.com</a></p>
+                        <p class="flex items-center"><i data-lucide="message-circle" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 官方 LINE ID: @gpg_consulting</p>
+                    </div>
+                    <div class="mt-10">
+                        <h4 class="text-xs font-bold text-gray-500 mb-4">FOLLOW US</h4>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800/50 mt-16 pt-8 text-center md:text-left text-xs text-gray-500">
+                <p>&copy; 2025 Graduate Planning Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+        }
+        
+        function openModal(id) {
+            const modal = document.getElementById('modal-' + id);
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+        
+        function closeModal(id) {
+            const modal = document.getElementById('modal-' + id);
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顧問團隊 - Graduate Planning Group</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // GPG Brand Colors
+                        'gpg-navy': '#16284d',
+                        'gpg-gold': '#C5A059',
+                        'gpg-cream': '#F0EAD6',
+                        'gpg-text': '#1C2B39',
+                        'gpg-light': '#F9F9F9',
+                        'gpg-gray-bg': '#F4F6F8',
+                        'gpg-gray': '#64748b',
+                        
+                        // Old vars for compatibility
+                        'ph-blue-dark': '#0f172a',
+                        'ph-blue-primary': '#1e40af',
+                        'ph-blue-light': '#eff6ff',
+                        'ph-gray-bg': '#f8fafc',
+                        'ph-text-body': '#334155',
+                        'ph-text-muted': '#64748b',
+                        'ph-ink': '#1a1a1a',
+                        'ph-paper': '#f9f9f9',
+                        'ph-accent': '#2c5282',
+                        'ph-gold': '#a38f6d',
+                    },
+                    fontFamily: {
+                        brand: ['"Cinzel"', 'serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'widest-plus': '0.25em',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f9f9f9; color: #1a1a1a; }
+        h1, h2, h3 { font-family: 'Noto Serif TC', serif; }
+        
+        .modal { opacity: 0; pointer-events: none; transition: all 0.3s ease-in-out; z-index: 100; }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        .modal-content { transform: scale(0.95); transition: transform 0.3s ease-in-out; }
+        .modal.active .modal-content { transform: scale(1); }
+
+        /* --- 軌道系統 --- */
+        .orbit-stage {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .energy-orbit {
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            border: 2px dashed rgba(11, 28, 52, 0.15);
+            border-radius: 50%;
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+        .star-core {
+            position: relative;
+            z-index: 10;
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            border: 6px solid white;
+            box-shadow: 0 0 40px rgba(11, 28, 52, 0.2), 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .star-core img { width: 100%; height: 100%; object-fit: cover; }
+
+        .satellite { position: absolute; width: 62px; height: 62px; z-index: 20; transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        
+        .logo-disk {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.4s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .logo-disk img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        /* 衛星座標 */
+        .s-4-1 { transform: rotate(-45deg) translate(135px) rotate(45deg); }
+        .s-4-2 { transform: rotate(45deg) translate(135px) rotate(-45deg); }
+        .s-4-3 { transform: rotate(135deg) translate(135px) rotate(-135deg); }
+        .s-4-4 { transform: rotate(225deg) translate(135px) rotate(-225deg); }
+
+        .s-5-1 { transform: rotate(-90deg) translate(135px) rotate(90deg); }
+        .s-5-2 { transform: rotate(-18deg) translate(135px) rotate(18deg); }
+        .s-5-3 { transform: rotate(54deg) translate(135px) rotate(-54deg); }
+        .s-5-4 { transform: rotate(126deg) translate(135px) rotate(-126deg); }
+        .s-5-5 { transform: rotate(198deg) translate(135px) rotate(-198deg); }
+
+        /* Hover 特效 */
+        .group:hover .star-core { transform: scale(1.08); box-shadow: 0 0 60px rgba(197, 160, 89, 0.4); border-color: #fdfdfd; }
+        .group:hover .energy-orbit { transform: scale(1.12); border-color: rgba(197, 160, 89, 0.4); }
+        
+        .group:hover .s-4-1 { transform: rotate(-45deg) translate(155px) rotate(45deg); }
+        .group:hover .s-4-2 { transform: rotate(45deg) translate(155px) rotate(-45deg); }
+        .group:hover .s-4-3 { transform: rotate(135deg) translate(155px) rotate(-135deg); }
+        .group:hover .s-4-4 { transform: rotate(225deg) translate(155px) rotate(-225deg); }
+
+        .group:hover .s-5-1 { transform: rotate(-90deg) translate(155px) rotate(90deg); }
+        .group:hover .s-5-2 { transform: rotate(-18deg) translate(155px) rotate(18deg); }
+        .group:hover .s-5-3 { transform: rotate(54deg) translate(155px) rotate(-54deg); }
+        .group:hover .s-5-4 { transform: rotate(126deg) translate(155px) rotate(-126deg); }
+        .group:hover .s-5-5 { transform: rotate(198deg) translate(155px) rotate(-198deg); }
+
+        .group:hover .logo-disk {
+            transform: scale(1.15);
+            border-color: #C5A059;
+            box-shadow: 0 12px 25px rgba(11, 28, 52, 0.15);
+        }
+
+        /* Modal Logo Box */
+        .modal-logo-box {
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 8px;
+            margin-right: 1rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .modal-logo-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+        @media (max-width: 768px) {
+            .orbit-stage { transform: scale(0.8); height: 280px; width: 280px; }
+        }
+        
+        /* Logo Sizing */
+        .nav-logo { height: 90px; width: auto; } 
+        .footer-logo { height: 90px; width: auto; }
+        
+        @media (max-width: 768px) {
+            .nav-logo { height: 60px; }
+            .footer-logo { height: 50px; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gpg-navy selection:text-gpg-gold">
+
+<nav class="fixed w-full z-50 border-b border-gray-200/50 transition-all duration-300" id="navbar" style="background-color: #fdfdfd;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-32">
+                
+                <a href="index.html" class="flex items-center group relative z-50 py-1">
+                    <img src="Logo 2.png" alt="Graduate Planning Group" class="nav-logo object-contain transition transform group-hover:scale-105 duration-300">
+                </a>
+                
+                <div class="hidden lg:flex space-x-1 text-sm font-bold tracking-wide items-center text-gpg-navy relative z-50">
+                    <a href="is-business-right-for-me.html" class="flex items-center text-gpg-gray hover:text-gpg-navy hover:bg-gray-100 transition py-2 px-4 rounded-sm group">
+                        <i data-lucide="compass" class="w-4 h-4 mr-2 text-gpg-gold"></i>
+                        適性落點診斷
+                    </a>
+                    
+                    <a href="mentors.html" class="hover:text-gpg-gold transition py-6 px-3">顧問陣容</a>
+                    <a href="results.html" class="hover:text-gpg-gold transition py-6 px-3">錄取榜單</a>
+                    
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">
+                            服務項目 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-64 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="services.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="block font-bold">國內頂大推甄</span>
+                                <span class="text-xs text-gray-400">台大財金、商研、國企</span>
+                            </a>
+                            <a href="overseas.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100 relative">
+                                <span class="block font-bold text-gpg-gold">海外留學申請 <span class="bg-gpg-navy text-white text-[9px] px-1.5 py-0.5 rounded ml-1">NEW</span></span>
+                                <span class="text-xs text-gray-400">Oxford, UPenn, Ivy League</span>
+                            </a>
+                            <a href="intern.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">實習職涯諮詢</span>
+                                <span class="text-xs text-gray-400">履歷精修、模擬面試</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative group px-3">
+                        <button class="flex items-center text-gpg-navy font-bold border-b-2 border-gpg-gold/20 transition py-6 focus:outline-none">
+                            獨家資源 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-56 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="faq.html" class="block px-6 py-4 text-gpg-navy bg-gray-50 font-bold border-b border-gray-100">
+                                <span class="block">推甄百科 FAQ</span>
+                            </a>
+                            <a href="resources.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">精選乾貨文章</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="pl-4 ml-2 border-l border-gray-300">
+                        <a href="index.html#contact" class="bg-gpg-navy text-white px-6 py-2.5 rounded-sm text-sm font-brand tracking-wider hover:bg-gpg-gold transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            CONSULT
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gpg-navy hover:text-gpg-gold focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-32 left-0 w-full border-b border-gray-200 shadow-xl h-[calc(100vh-128px)] overflow-y-auto z-40" style="background-color: #fdfdfd;">
+            <div class="flex flex-col p-6 space-y-6">
+                <a href="is-business-right-for-me.html" class="text-xl font-bold text-gpg-navy flex items-center py-2 border-b border-gray-300/50"><i data-lucide="compass" class="w-6 h-6 mr-2 text-gpg-gold"></i> 適性落點診斷</a>
+                <a href="mentors.html" class="block text-lg font-bold text-gray-700">顧問陣容</a>
+                <a href="results.html" class="block text-lg font-bold text-gray-700">錄取榜單</a>
+                
+                <div class="border-l-4 border-gpg-gold pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Services</span>
+                    <a href="services.html" class="block text-lg font-bold text-gray-700 mb-2">國內推甄服務</a>
+                    <a href="overseas.html" class="block text-lg font-bold text-gpg-gold mb-2">海外留學申請</a>
+                    <a href="intern.html" class="block text-lg font-bold text-gray-700">實習諮詢</a>
+                </div>
+
+                <div class="border-l-4 border-gray-300 pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Resources</span>
+                    <a href="faq.html" class="block text-lg font-bold text-gpg-navy mb-2">推甄百科 FAQ</a>
+                    <a href="resources.html" class="block text-lg font-bold text-gray-700">精選乾貨文章</a>
+                </div>
+
+                <a href="index.html#contact" class="block w-full bg-gpg-navy text-white text-center py-4 rounded-sm font-bold shadow-lg mt-4">立即預約免費評估</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-40 pb-20 bg-gpg-gray-bg text-center px-6 min-h-[50vh] flex items-center justify-center">
+        <div class="max-w-4xl mx-auto">
+            <span class="inline-block py-1 px-3 rounded-full bg-white border border-gpg-gold text-gpg-gold text-xs font-bold tracking-widest uppercase mb-6 shadow-sm font-brand">Elite Advisory Team</span>
+            <h1 class="text-4xl md:text-6xl font-bold text-gpg-navy mb-8 font-brand">Founding Team</h1>
+            <p class="text-gray-600 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">
+                我們是就讀於台大管院的研究生，並擁有<span class="text-gpg-navy font-bold border-b border-gpg-gold/50">世界頂尖名校錄取經驗</span>。
+                <br>以最高的學術規格，為你領航。
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-24 md:gap-12">
+            
+            <div class="group relative cursor-pointer" onclick="openModal('albert')">
+                <div class="orbit-stage">
+                    <div class="energy-orbit"></div>
+                    <div class="star-core">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Albert" class="grayscale group-hover:grayscale-0 transition duration-700">
+                    </div>
+                    <div class="satellite s-4-1"><div class="logo-disk"><img src="WQ logo.png" alt="WorldQuant"></div></div>
+                    <div class="satellite s-4-2"><div class="logo-disk"><img src="RGA logo.png" alt="RGA"></div></div>
+                    <div class="satellite s-4-3"><div class="logo-disk"><img src="統計科學所 logo.png" alt="ISS"></div></div>
+                    <div class="satellite s-4-4"><div class="logo-disk"><img src="資訊科學所 logo.png" alt="IIS"></div></div>
+                </div>
+                <div class="text-center mt-8">
+                    <div class="bg-gpg-navy text-xs text-white font-bold px-3 py-1 inline-block rounded-full mb-3 uppercase tracking-widest">Quant Specialist</div>
+                    <h3 class="text-3xl font-serif font-bold text-gpg-navy mb-1">Albert</h3>
+                    <p class="text-gray-500 font-medium mb-4">台大財金所 / 碩一</p>
+                    <span class="text-sm font-bold text-gpg-text bg-white border border-gray-200 px-4 py-2 rounded-full inline-block shadow-sm">書卷獎 x 3 (Top 5%)</span>
+                </div>
+            </div>
+
+            <div class="group relative cursor-pointer" onclick="openModal('andy')">
+                <div class="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-gpg-navy to-black text-gpg-gold text-xs font-bold px-4 py-1.5 rounded-full shadow-lg z-30 whitespace-nowrap animate-bounce border border-gpg-gold">
+                    ★ Oxford & UPenn 雙錄取 ★
+                </div>
+                
+                <div class="orbit-stage">
+                    <div class="energy-orbit border-gpg-gold/30"></div>
+                    <div class="star-core border-gpg-gold">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Andy" class="grayscale group-hover:grayscale-0 transition duration-700">
+                    </div>
+                    <div class="satellite s-5-1"><div class="logo-disk border-gpg-gold"><img src="BCG logo.png" alt="BCG"></div></div>
+                    <div class="satellite s-5-2"><div class="logo-disk border-gpg-gold"><img src="KPMG logo.png" alt="KPMG"></div></div>
+                    <div class="satellite s-5-3"><div class="logo-disk border-gpg-gold"><img src="Fubon_Group.svg.png" alt="Fubon"></div></div>
+                    <div class="satellite s-5-4"><div class="logo-disk border-gpg-gold"><img src="統計科學所 logo.png" alt="ISS"></div></div>
+                    <div class="satellite s-5-5"><div class="logo-disk border-gpg-gold"><img src="資訊科學所 logo.png" alt="IIS"></div></div>
+                </div>
+                <div class="text-center mt-8">
+                    <div class="bg-gpg-gold text-xs text-white font-bold px-3 py-1 inline-block rounded-full mb-3 uppercase tracking-widest">Global Top Talent</div>
+                    <h3 class="text-3xl font-serif font-bold text-gpg-navy mb-1">Andy</h3>
+                    <p class="text-gray-500 font-medium mb-4">台大商研所 / Oxford / UPenn</p>
+                    <span class="text-sm font-bold text-gpg-text bg-white border border-gray-200 px-4 py-2 rounded-full inline-block shadow-sm">書卷獎 x 5 (Top 3%)</span>
+                </div>
+            </div>
+
+            <div class="group relative cursor-pointer" onclick="openModal('annie')">
+                <div class="orbit-stage">
+                    <div class="energy-orbit"></div>
+                    <div class="star-core">
+                        <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Annie" class="grayscale group-hover:grayscale-0 transition duration-700">
+                    </div>
+                    <div class="satellite s-4-1"><div class="logo-disk"><img src="AZ logo.png" alt="AZ"></div></div>
+                    <div class="satellite s-4-2"><div class="logo-disk"><img src="RGA logo.png" alt="RGA"></div></div>
+                    <div class="satellite s-4-3"><div class="logo-disk"><img src="統計科學所 logo.png" alt="ISS"></div></div>
+                    <div class="satellite s-4-4"><div class="logo-disk"><img src="資訊科學所 logo.png" alt="IIS"></div></div>
+                </div>
+                <div class="text-center mt-8">
+                    <div class="bg-pink-700 text-xs text-white font-bold px-3 py-1 inline-block rounded-full mb-3 uppercase tracking-widest">Strategy Expert</div>
+                    <h3 class="text-3xl font-serif font-bold text-gpg-navy mb-1">Annie</h3>
+                    <p class="text-gray-500 font-medium mb-4">台大國企所 / 碩一</p>
+                    <span class="text-sm font-bold text-gpg-text bg-white border border-gray-200 px-4 py-2 rounded-full inline-block shadow-sm">書卷獎 x 3 (Top 7%)</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="modal-albert" class="modal fixed inset-0 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('albert')">
+        <div class="modal-content bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-50 p-2" onclick="closeModal('albert')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full md:w-1/3 bg-gray-50 p-8 flex flex-col items-center border-r border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" class="w-32 h-32 rounded-full object-cover mb-4 shadow-md border-4 border-white">
+                    <h3 class="text-2xl font-serif font-bold text-ph-ink text-center">Albert</h3>
+                    <div class="w-full space-y-2 text-sm text-gray-600 mt-4">
+                        <div class="bg-white p-3 rounded shadow-sm border"><span class="block text-xs text-gray-400 font-bold">學歷</span>政大金融 (GPA 3.9/4.0)</div>
+                        <div class="bg-white p-3 rounded shadow-sm border"><span class="block text-xs text-gray-400 font-bold">榮譽</span>書卷獎 x 3 (Top 5%)</div>
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 p-8">
+                    <h4 class="text-lg font-bold text-ph-ink mb-6 border-b-2 border-ph-gold pb-2 inline-block">專業實戰與研究經歷</h4>
+                    <ul class="space-y-6 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <div class="modal-logo-box"><img src="WQ logo.png" alt="WorldQuant"></div>
+                            <div>
+                                <span class="font-bold text-ph-ink block text-base">WorldQuant | Quantitative Researcher</span>
+                                <p class="leading-relaxed mt-1">主導 Alpha 因子策略開發，運用統計套利模型優化回測訊號，協助你在書審中展現極致的程式與量化優勢。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="modal-logo-box"><img src="RGA logo.png" alt="RGA"></div>
+                            <div>
+                                <span class="font-bold text-ph-ink block text-base">RGA | Data Analyst Intern</span>
+                                <p class="leading-relaxed mt-1">利用 SQL 與 VBA 建構自動化資料處理流程，處理龐大保費與理賠數據，確保精算模型輸入資料的完整性。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="modal-logo-box"><img src="資訊科學所 logo.png" alt="IIS"></div>
+                            <div>
+                                <span class="font-bold text-ph-ink block text-base">中研院 資訊科學所 (IIS) | RL 研究專案</span>
+                                <p class="leading-relaxed mt-1">獨立開發強化學習資產配置模型 (TD3 Agent)。設計融合 Sharpe ratio 的獎勵函數。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-annie" class="modal fixed inset-0 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('annie')">
+        <div class="modal-content bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-50 p-2" onclick="closeModal('annie')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full md:w-1/3 bg-gray-50 p-8 flex flex-col items-center border-r border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" class="w-32 h-32 rounded-full object-cover mb-4 shadow-md border-4 border-white">
+                    <h3 class="text-2xl font-serif font-bold text-ph-ink text-center">Annie</h3>
+                    <div class="w-full space-y-2 text-sm text-gray-600 mt-4">
+                        <div class="bg-white p-3 rounded shadow-sm border"><span class="block text-xs text-gray-400 font-bold">學歷</span>台大國企所 碩一</div>
+                        <div class="bg-white p-3 rounded shadow-sm border"><span class="block text-xs text-gray-400 font-bold">榮譽</span>書卷獎 x 3 (Top 7%)</div>
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 p-8">
+                    <h4 class="text-lg font-bold text-ph-ink mb-6 border-b-2 border-ph-gold pb-2 inline-block">專業實戰經歷</h4>
+                    <ul class="space-y-6 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <div class="modal-logo-box"><img src="AZ logo.png" alt="AZ"></div>
+                            <div>
+                                <span class="font-bold text-ph-ink block text-base">AstraZeneca (AZ) | Commercial Excellence Intern</span>
+                                <p class="leading-relaxed mt-1">參與新藥上市 Go-to-Market 策略分析，利用內部數據庫分析市場行為，提供精準行銷建議。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="modal-logo-box"><img src="RGA logo.png" alt="RGA"></div>
+                            <div>
+                                <span class="font-bold text-ph-ink block text-base">RGA | Data Intern</span>
+                                <p class="leading-relaxed mt-1">負責跨國保單數據清洗，優化自動化流程，將月結報表效率提升 40%。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-andy" class="modal fixed inset-0 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('andy')">
+        <div class="modal-content bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-50 p-2" onclick="closeModal('andy')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="flex flex-col md:flex-row">
+                <div class="w-full md:w-1/3 bg-gray-50 p-8 flex flex-col items-center border-r border-gray-100">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" class="w-32 h-32 rounded-full object-cover mb-4 shadow-md border-4 border-white">
+                    <h3 class="text-2xl font-serif font-bold text-ph-ink text-center">Andy</h3>
+                    <div class="w-full space-y-2 text-sm text-gray-600 mt-4">
+                        <div class="bg-white p-3 rounded shadow-sm border"><span class="block text-xs text-gray-400 font-bold">大學學歷</span>政大金融 (雙修統計)</div>
+                        <div class="bg-white p-3 rounded shadow-sm border"><span class="block text-xs text-gray-400 font-bold">國內學歷</span>台大商研所 碩一</div>
+                        <div class="bg-white p-3 rounded shadow-sm border"><span class="block text-xs text-gray-400 font-bold">榮譽</span>系排 3% | 書卷獎 x 5</div>
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 p-8">
+                    <div class="mb-8 p-4 bg-gpg-navy/5 rounded-lg border border-gpg-gold/30">
+                        <h4 class="text-lg font-bold text-gpg-navy mb-4 flex items-center">
+                            <i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 2025 海外名校錄取戰績
+                            <span class="ml-2 text-[10px] text-gray-400 font-normal">(點擊查看 Offer)</span>
+                        </h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div onclick="openProof('proof-oxford.png')" class="flex items-center space-x-3 bg-white p-3 rounded shadow-sm border border-gray-100 cursor-pointer hover:border-gpg-gold hover:shadow-md transition group">
+                                <span class="font-serif text-2xl font-bold text-gpg-navy group-hover:text-gpg-gold transition">Oxford</span>
+                                <div class="text-xs text-gray-500">
+                                    <span class="block font-bold text-gpg-text">University of Oxford</span>
+                                    MSc in Statistical Science
+                                    <span class="block text-[10px] text-gpg-gold mt-1 underline">查看錄取信 &rarr;</span>
+                                </div>
+                            </div>
+                            <div onclick="openProof('proof-upenn.png')" class="flex items-center space-x-3 bg-white p-3 rounded shadow-sm border border-gray-100 cursor-pointer hover:border-gpg-gold hover:shadow-md transition group">
+                                <span class="font-serif text-2xl font-bold text-gpg-navy group-hover:text-gpg-gold transition">UPenn</span>
+                                <div class="text-xs text-gray-500">
+                                    <span class="block font-bold text-gpg-text">University of Pennsylvania</span>
+                                    MSE in Data Science
+                                    <span class="block text-[10px] text-gpg-gold mt-1 underline">查看錄取信 &rarr;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-bold text-ph-ink mb-6 border-b-2 border-ph-gold pb-2 inline-block">專業實戰經歷</h4>
+                    <ul class="space-y-6 text-sm text-gray-700">
+                        <li class="flex items-start">
+                            <div class="modal-logo-box"><img src="BCG logo.png" alt="BCG"></div>
+                            <div>
+                                <span class="font-bold text-ph-ink block text-base">Boston Consulting Group (BCG) | PTA</span>
+                                <p class="leading-relaxed mt-1">主導<strong>知名科技製造集團</strong> AI 轉型專案之 PMO 支援，將複雜會議紀錄轉化為 MECE issue trees。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="modal-logo-box"><img src="KPMG logo.png" alt="KPMG"></div>
+                            <div>
+                                <span class="font-bold text-ph-ink block text-base">KPMG | 風險顧問 (ESG Analytics)</span>
+                                <p class="leading-relaxed mt-1">建構符合 GHG Protocol 的自動化碳盤查 Pipeline。利用 Python Web Scraper 優化數據精確度。</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="modal-logo-box"><img src="資訊科學所 logo.png" alt="IIS"></div>
+                            <div>
+                                <span class="font-bold text-ph-ink block text-base">中研院 資訊科學所 (IIS) | RAG 研究員</span>
+                                <p class="leading-relaxed mt-1">參與<strong>國際頂尖資訊檢索競賽</strong>，設計多階段檢索生成流程。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="proof-viewer" class="fixed inset-0 z-[200] bg-black/90 hidden flex items-center justify-center p-4 backdrop-blur-sm transition-opacity duration-300 opacity-0" onclick="closeProof()">
+        <div class="relative max-w-4xl w-full max-h-screen flex flex-col items-center">
+            <button class="absolute -top-12 right-0 text-white hover:text-gpg-gold transition p-2" onclick="closeProof()">
+                <i data-lucide="x" class="w-8 h-8"></i>
+            </button>
+            <img id="proof-image" src="" alt="Admission Proof" class="max-h-[85vh] w-auto rounded-lg shadow-2xl border border-gray-700 object-contain" onclick="event.stopPropagation()">
+            <p class="text-gray-400 text-sm mt-4">點擊背景關閉預覽</p>
+        </div>
+    </div>
+
+    <footer class="bg-gpg-navy text-white py-20 border-t border-gpg-gold/20 font-sans">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="space-y-8">
+                    <a href="index.html" class="block w-fit">
+                         <img src="Logo 1.png" alt="Graduate Planning Group" class="footer-logo object-contain">
+                    </a>
+                    <div class="text-gray-400 text-sm leading-8 text-justify border-l-2 border-gpg-gold/40 pl-6">
+                        <p class="mb-6 font-light opacity-90">
+                            「在追求頂尖的路上，孤獨是常態，但你不必獨自摸索。從台大管院到歐美名校，我們走過你要走的路，也犯過你可能會犯的錯。」
+                        </p>
+                        <p class="text-white font-medium">
+                            <span class="text-gpg-gold">Graduate Planning Group</span> 不做流水線的代辦，我們做你的「戰略合夥人」。陪你把學歷的天花板，變成職涯的起跑點。
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:pl-12 pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Quick Links</h3>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="results.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 2025 最新榜單</a></li>
+                        <li><a href="mentors.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 顧問團隊介紹</a></li>
+                        <li><a href="intern.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 實習諮詢</a></li>
+                        <li><a href="services.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 服務方案與價格</a></li>
+                        <li><a href="faq.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 推甄百科 FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Contact Us</h3>
+                    <div class="space-y-6 text-sm text-gray-400">
+                        <p class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 國立臺灣大學 管理學院<br>106 台北市大安區羅斯福路四段1號</p>
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> <a href="mailto:contact@gpg-consulting.com" class="hover:text-white transition">contact@gpg-consulting.com</a></p>
+                        <p class="flex items-center"><i data-lucide="message-circle" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 官方 LINE ID: @gpg_consulting</p>
+                    </div>
+                    <div class="mt-10">
+                        <h4 class="text-xs font-bold text-gray-500 mb-4">FOLLOW US</h4>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800/50 mt-16 pt-8 text-center md:text-left text-xs text-gray-500">
+                <p>&copy; 2025 Graduate Planning Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('flex');
+            });
+        }
+        
+        function openModal(id) {
+            const m = document.getElementById('modal-' + id);
+            m.classList.remove('hidden');
+            setTimeout(() => m.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            const m = document.getElementById('modal-' + id);
+            m.classList.remove('active');
+            setTimeout(() => m.classList.add('hidden'), 300);
+            document.body.style.overflow = 'auto';
+        }
+
+        // Image Proof Viewer Logic
+        function openProof(imageSrc) {
+            const viewer = document.getElementById('proof-viewer');
+            const img = document.getElementById('proof-image');
+            img.src = imageSrc;
+            viewer.classList.remove('hidden');
+            setTimeout(() => {
+                viewer.classList.remove('opacity-0');
+            }, 10);
+        }
+
+        function closeProof() {
+            const viewer = document.getElementById('proof-viewer');
+            const img = document.getElementById('proof-image');
+            viewer.classList.add('opacity-0');
+            setTimeout(() => {
+                viewer.classList.add('hidden');
+                img.src = "";
+            }, 300);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>實習諮詢：一場關於本質的對話 - Graduate Planning Group</title>
+    <meta name="theme-color" content="#fdfdfd">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // GPG Brand Colors
+                        'gpg-navy': '#16284d',
+                        'gpg-gold': '#C5A059',
+                        'gpg-cream': '#F0EAD6',
+                        'gpg-text': '#1C2B39',
+                        'gpg-light': '#F9F9F9',
+                        'gpg-gray-bg': '#F4F6F8',
+                        'gpg-gray': '#64748b',
+                        
+                        // Old vars for compatibility (保留內容樣式)
+                        'ph-ink': '#121212',
+                        'ph-paper': '#F5F5F7',
+                        'ph-accent': '#2A4568',
+                        'ph-gold': '#A38F6D',
+                        'ph-highlight': '#0066CC',
+                        'ph-blue-dark': '#0f172a',
+                        'ph-blue-primary': '#1e40af',
+                    },
+                    fontFamily: {
+                        brand: ['"Cinzel"', 'serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'widest-plus': '0.25em',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F5F5F7; color: #121212; font-family: 'Inter', sans-serif; }
+        h1, h2, h3, h4 { font-family: 'Noto Serif TC', serif; }
+        
+        /* 滾動顯現特效 */
+        .fade-up { opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+        .fade-up.active { opacity: 1; transform: translateY(0); }
+        
+        /* Logo Card Style - Minimalist */
+        .logo-card {
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 140px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .logo-card:hover {
+            border-color: #2A4568;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);
+        }
+        .logo-img {
+            max-width: 80%;
+            max-height: 50px;
+            object-fit: contain;
+            filter: grayscale(100%);
+            opacity: 0.6;
+            transition: all 0.4s ease;
+        }
+        .logo-card:hover .logo-img {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        .logo-label {
+            margin-top: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            color: #9CA3AF;
+            text-transform: uppercase;
+            transition: color 0.4s ease;
+        }
+        .logo-card:hover .logo-label {
+            color: #2A4568;
+        }
+        
+        /* Logo Sizing */
+        .nav-logo { height: 90px; width: auto; } 
+        .footer-logo { height: 90px; width: auto; }
+        
+        @media (max-width: 768px) {
+            .nav-logo { height: 60px; }
+            .footer-logo { height: 50px; }
+        }
+        
+        /* Calendly Override */
+        .calendly-inline-widget { min-width:320px; height:700px; }
+    </style>
+</head>
+<body class="antialiased selection:bg-gpg-navy selection:text-gpg-gold">
+
+<nav class="fixed w-full z-50 border-b border-gray-200/50 transition-all duration-300" id="navbar" style="background-color: #fdfdfd;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-32">
+                
+                <a href="index.html" class="flex items-center group relative z-50 py-1">
+                    <img src="Logo 2.png" alt="Graduate Planning Group" class="nav-logo object-contain transition transform group-hover:scale-105 duration-300">
+                </a>
+                
+                <div class="hidden lg:flex space-x-1 text-sm font-bold tracking-wide items-center text-gpg-navy relative z-50">
+                    <a href="is-business-right-for-me.html" class="flex items-center text-gpg-gray hover:text-gpg-navy hover:bg-gray-100 transition py-2 px-4 rounded-sm group">
+                        <i data-lucide="compass" class="w-4 h-4 mr-2 text-gpg-gold"></i>
+                        適性落點診斷
+                    </a>
+                    
+                    <a href="mentors.html" class="hover:text-gpg-gold transition py-6 px-3">顧問陣容</a>
+                    <a href="results.html" class="hover:text-gpg-gold transition py-6 px-3">錄取榜單</a>
+                    
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">
+                            服務項目 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-64 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="services.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="block font-bold">國內頂大推甄</span>
+                                <span class="text-xs text-gray-400">台大財金、商研、國企</span>
+                            </a>
+                            <a href="overseas.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100 relative">
+                                <span class="block font-bold text-gpg-gold">海外留學申請 <span class="bg-gpg-navy text-white text-[9px] px-1.5 py-0.5 rounded ml-1">NEW</span></span>
+                                <span class="text-xs text-gray-400">Oxford, UPenn, Ivy League</span>
+                            </a>
+                            <a href="intern.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">實習職涯諮詢</span>
+                                <span class="text-xs text-gray-400">履歷精修、模擬面試</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative group px-3">
+                        <button class="flex items-center text-gpg-navy font-bold border-b-2 border-gpg-gold/20 transition py-6 focus:outline-none">
+                            獨家資源 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-56 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="faq.html" class="block px-6 py-4 text-gpg-navy bg-gray-50 font-bold border-b border-gray-100">
+                                <span class="block">推甄百科 FAQ</span>
+                            </a>
+                            <a href="resources.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">精選乾貨文章</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="pl-4 ml-2 border-l border-gray-300">
+                        <a href="index.html#contact" class="bg-gpg-navy text-white px-6 py-2.5 rounded-sm text-sm font-brand tracking-wider hover:bg-gpg-gold transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            CONSULT
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gpg-navy hover:text-gpg-gold focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-32 left-0 w-full border-b border-gray-200 shadow-xl h-[calc(100vh-128px)] overflow-y-auto z-40" style="background-color: #fdfdfd;">
+            <div class="flex flex-col p-6 space-y-6">
+                <a href="is-business-right-for-me.html" class="text-xl font-bold text-gpg-navy flex items-center py-2 border-b border-gray-300/50"><i data-lucide="compass" class="w-6 h-6 mr-2 text-gpg-gold"></i> 適性落點診斷</a>
+                <a href="mentors.html" class="block text-lg font-bold text-gray-700">顧問陣容</a>
+                <a href="results.html" class="block text-lg font-bold text-gray-700">錄取榜單</a>
+                
+                <div class="border-l-4 border-gpg-gold pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Services</span>
+                    <a href="services.html" class="block text-lg font-bold text-gray-700 mb-2">國內推甄服務</a>
+                    <a href="overseas.html" class="block text-lg font-bold text-gpg-gold mb-2">海外留學申請</a>
+                    <a href="intern.html" class="block text-lg font-bold text-gray-700">實習諮詢</a>
+                </div>
+
+                <div class="border-l-4 border-gray-300 pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Resources</span>
+                    <a href="faq.html" class="block text-lg font-bold text-gpg-navy mb-2">推甄百科 FAQ</a>
+                    <a href="resources.html" class="block text-lg font-bold text-gray-700">精選乾貨文章</a>
+                </div>
+
+                <a href="index.html#contact" class="block w-full bg-gpg-navy text-white text-center py-4 rounded-sm font-bold shadow-lg mt-4">立即預約免費評估</a>
+            </div>
+        </div>
+    </nav>
+    <section class="min-h-[85vh] flex items-center justify-center pt-32 pb-20 px-6 relative z-10 overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-20">
+            <div class="inline-block mb-10 fade-up">
+                <span class="border border-ph-ink/20 text-ph-ink px-4 py-1.5 rounded-full text-xs font-serif italic tracking-wider">
+                    Career Identity Lab
+                </span>
+            </div>
+            <h1 class="text-4xl md:text-6xl font-serif font-medium leading-[1.4] text-ph-ink mb-12 fade-up" style="transition-delay: 0.2s;">
+                這份實習，<br>
+                究竟是你的「跳板」，<br>
+                還是你的<span class="italic text-ph-accent relative inline-block">「偽裝」
+                    <svg class="absolute w-full h-2 -bottom-0 left-0 text-ph-accent opacity-30" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="2" fill="none" /></svg>
+                </span>？
+            </h1>
+            <div class="max-w-2xl mx-auto text-gray-600 leading-loose font-light text-lg fade-up" style="transition-delay: 0.4s;">
+                <p class="mb-6">
+                    你拼命粉飾履歷，去申請一份你其實根本不喜歡的工作。<br>
+                    只因為大家都說，那是頂大生該去的地方。
+                </p>
+                <p>
+                    但面試官看得到你的眼神是空的。<br>
+                    你騙過了系上的同學，但你騙不過那些在商場打滾十年的面試官。
+                </p>
+            </div>
+            <div class="mt-16 fade-up" style="transition-delay: 0.6s;">
+                <a href="#philosophy" class="text-sm font-bold text-ph-accent tracking-widest uppercase hover:text-ph-ink transition">
+                    我們如何看見真實的你 <i data-lucide="arrow-down" class="w-4 h-4 inline ml-1 animate-bounce"></i>
+                </a>
+            </div>
+        </div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gray-200/50 rounded-full blur-[120px] -z-10"></div>
+    </section>
+
+    <section id="philosophy" class="py-32 px-6 relative">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-16 items-start">
+                <div class="w-full md:w-1/3 fade-up sticky top-32">
+                    <h2 class="text-3xl font-serif font-bold text-ph-ink mb-6">我們不「修改」你。<br>我們「翻譯」你。</h2>
+                    <div class="w-12 h-1 bg-ph-accent mb-6"></div>
+                    <p class="text-gray-500 text-sm leading-relaxed">
+                        市面上的顧問試圖把你塞進一個標準化的模具裡。<br>
+                        但 PH Consulting 做的是相反的事。<br>
+                        我們把那些被你視為「缺點」的特質，翻譯成商業世界聽得懂的「稀缺價值」。
+                    </p>
+                </div>
+                <div class="w-full md:w-2/3 space-y-12">
+                    <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 fade-up hover:shadow-xl transition duration-500 group">
+                        <div class="flex items-start mb-4">
+                            <span class="text-5xl font-serif font-bold text-gray-100 group-hover:text-ph-highlight/20 transition duration-500 mr-4">01</span>
+                            <div>
+                                <h3 class="text-xl font-bold text-ph-ink mb-2">深度閱讀 (Deep Reading)</h3>
+                                <p class="text-gray-600 leading-relaxed">
+                                    在看你的履歷之前，我們先看你這個人。<br>
+                                    我們會花大量的時間與你對話，挖掘那些你自己都忽略的生命細節。
+                                    <span class="block mt-4 text-ph-accent font-medium">
+                                        「我們會深度閱讀你，把你送到真的適合你的地方。」
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 fade-up hover:shadow-xl transition duration-500 group">
+                        <div class="flex items-start mb-4">
+                            <span class="text-5xl font-serif font-bold text-gray-100 group-hover:text-ph-highlight/20 transition duration-500 mr-4">02</span>
+                            <div>
+                                <h3 class="text-xl font-bold text-ph-ink mb-2">本質翻譯 (Essence Translation)</h3>
+                                <p class="text-gray-600 leading-relaxed">
+                                    你不用假裝自己很外向，也不用假裝自己熱愛金融。<br>
+                                    如果你的本質是內斂的觀察者，我們就幫你把這份「內斂」，翻譯成「洞察力」與「穩健」。<br>
+                                    真實，才是面試場上最強大的武器。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 fade-up hover:shadow-xl transition duration-500 group">
+                        <div class="flex items-start mb-4">
+                            <span class="text-5xl font-serif font-bold text-gray-100 group-hover:text-ph-highlight/20 transition duration-500 mr-4">03</span>
+                            <div>
+                                <h3 class="text-xl font-bold text-ph-ink mb-2">頻率校準 (Alignment)</h3>
+                                <p class="text-gray-600 leading-relaxed">
+                                    我們不建議海投。我們幫你篩選出那些「頻率」與你相符的企業。<br>
+                                    因為我們知道，一份不適合你的實習，比履歷空白更可怕——它會消耗你的自信，讓你離真正的自己越來越遠。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-white border-t border-gray-100">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-2xl md:text-3xl font-serif font-bold text-ph-ink mb-12 fade-up">你現在遇到的瓶頸，<br>真的是「能力」問題嗎？</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+                <div class="fade-up">
+                    <h4 class="font-bold text-ph-ink mb-3 flex items-center"><i data-lucide="x" class="w-4 h-4 text-red-400 mr-2"></i> 履歷被秒拒</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">不是因為你不夠優秀，而是你的履歷像一份「購物清單」，列了一堆技能，卻沒有一個關於「你是誰」的故事。</p>
+                </div>
+                <div class="fade-up" style="transition-delay: 0.1s;">
+                    <h4 class="font-bold text-ph-ink mb-3 flex items-center"><i data-lucide="x" class="w-4 h-4 text-red-400 mr-2"></i> 面試像背稿</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">你試圖猜測面試官想聽什麼，結果你說出來的話連自己都不信。面試官聞到了那股「偽裝」的味道。</p>
+                </div>
+                <div class="fade-up" style="transition-delay: 0.2s;">
+                    <h4 class="font-bold text-ph-ink mb-3 flex items-center"><i data-lucide="x" class="w-4 h-4 text-red-400 mr-2"></i> 越做越迷惘</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed">為了推甄去刷實習，結果發現自己討厭這份工作。這種焦慮會寫在你的臉上，教授一眼就看穿了。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section class="py-24 bg-[#F5F5F7] border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+        <div class="fade-up">
+            <span class="text-ph-accent font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Proven Track Record</span>
+            <h2 class="text-3xl font-serif font-bold text-ph-ink mb-6">無論你想去哪，我們都有人去過。</h2>
+            <p class="text-gray-500 mb-16 max-w-2xl mx-auto font-light leading-relaxed">我們教你的不是理論，而是我們親身走過的路。<br>從外商投行、頂尖管顧到科技巨頭，這裡有曾經和你一樣迷惘，但最終突圍的學長姐。</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 fade-up" style="transition-delay: 0.2s;">
+            <div class="logo-card group"><img src="BCG logo.png" alt="BCG" class="logo-img" style="transform: scale(0.7);"><span class="logo-label">BCG</span></div>
+            <div class="logo-card group"><img src="WQ logo.png" alt="WorldQuant" class="logo-img" style="transform: scale(1.2);"><span class="logo-label">WorldQuant</span></div>
+            <div class="logo-card group"><img src="Shopee.png" alt="Shopee" class="logo-img"><span class="logo-label">Shopee</span></div>
+            <div class="logo-card group"><img src="AZ logo.png" alt="AstraZeneca" class="logo-img"><span class="logo-label">AstraZeneca</span></div>
+            <div class="logo-card group"><img src="TEJ.png" alt="TEJ" class="logo-img"><span class="logo-label">TEJ</span></div>
+            <div class="logo-card group"><img src="RGA logo.png" alt="RGA" class="logo-img"><span class="logo-label">RGA</span></div>
+            <div class="logo-card group"><img src="KPMG logo.png" alt="KPMG" class="logo-img"><span class="logo-label">KPMG</span></div>
+            <div class="logo-card group"><img src="Fubon_Group.svg.png" alt="Fubon" class="logo-img"><span class="logo-label">富邦金控</span></div>
+            <div class="logo-card group"><img src="資訊科學所 logo.png" alt="IIS" class="logo-img"><span class="logo-label">中研院 資訊所</span></div>
+            <div class="logo-card group"><img src="統計科學所 logo.png" alt="ISS" class="logo-img"><span class="logo-label">中研院 統計所</span></div>
+            <div class="logo-card group"><img src="HPE.png" alt="HPE" class="logo-img"><span class="logo-label">HPE</span></div>
+            <div class="logo-card group"><img src="CTBC.png" alt="CTBC" class="logo-img"><span class="logo-label">中國信託</span></div>
+        </div>
+        <p class="text-xs text-gray-400 mt-10 italic fade-up" style="transition-delay: 0.4s;">* 以上皆為顧問團隊成員曾錄取或實習之企業機構。</p>
+    </div>
+</section>
+
+    <section id="contact" class="py-32 px-6 relative bg-white border-t border-gray-200">
+        <div class="max-w-3xl mx-auto text-center fade-up">
+            <h2 class="text-3xl md:text-5xl font-serif font-bold text-ph-ink mb-8 leading-tight">別再一個人<br>對著螢幕焦慮。</h2>
+            <p class="text-gray-600 text-lg leading-loose mb-12 font-serif">來找我們聊聊吧。<br>不一定是為了修改履歷，也許只是為了確認——<br>這條路，真的是你想走的嗎？</p>
+            <div class="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 max-w-2xl mx-auto">
+                 <div class="calendly-inline-widget" data-url="https://calendly.com/albertchen0227/30min?hide_landing_page_details=1&hide_gdpr_banner=1" style="min-width:320px;height:600px;"></div>
+                 <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+            </div>
+            <div class="mt-12 text-center">
+                <p class="text-xs text-gray-400 mb-4 tracking-widest uppercase">Or connect with us</p>
+                <div class="flex justify-center space-x-6 text-ph-ink">
+                    <a href="#" class="border-b border-transparent hover:border-ph-ink transition">Line: @gpg_consulting</a>
+                    <a href="mailto:contact@gpg-consulting.com" class="border-b border-transparent hover:border-ph-ink transition">Email Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gpg-navy text-white py-20 border-t border-gpg-gold/20 font-sans">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="space-y-8">
+                    <a href="index.html" class="block w-fit">
+                         <img src="Logo 1.png" alt="Graduate Planning Group" class="footer-logo object-contain">
+                    </a>
+                    <div class="text-gray-400 text-sm leading-8 text-justify border-l-2 border-gpg-gold/40 pl-6">
+                        <p class="mb-6 font-light opacity-90">
+                            「在追求頂尖的路上，孤獨是常態，但你不必獨自摸索。從台大管院到歐美名校，我們走過你要走的路，也犯過你可能會犯的錯。」
+                        </p>
+                        <p class="text-white font-medium">
+                            <span class="text-gpg-gold">Graduate Planning Group</span> 不做流水線的代辦，我們做你的「戰略合夥人」。陪你把學歷的天花板，變成職涯的起跑點。
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:pl-12 pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Quick Links</h3>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="results.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 2025 最新榜單</a></li>
+                        <li><a href="mentors.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 顧問團隊介紹</a></li>
+                        <li><a href="intern.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 實習諮詢</a></li>
+                        <li><a href="services.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 服務方案與價格</a></li>
+                        <li><a href="faq.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 推甄百科 FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Contact Us</h3>
+                    <div class="space-y-6 text-sm text-gray-400">
+                        <p class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 國立臺灣大學 管理學院<br>106 台北市大安區羅斯福路四段1號</p>
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> <a href="mailto:contact@gpg-consulting.com" class="hover:text-white transition">contact@gpg-consulting.com</a></p>
+                        <p class="flex items-center"><i data-lucide="message-circle" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 官方 LINE ID: @gpg_consulting</p>
+                    </div>
+                    <div class="mt-10">
+                        <h4 class="text-xs font-bold text-gray-500 mb-4">FOLLOW US</h4>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800/50 mt-16 pt-8 text-center md:text-left text-xs text-gray-500">
+                <p>&copy; 2025 Graduate Planning Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        
+        // Mobile Menu
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('flex');
+            });
+        }
+        
+        // Scroll Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

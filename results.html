@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最新榜單 - Graduate Planning Group</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@300;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // GPG Brand Colors
+                        'gpg-navy': '#16284d',
+                        'gpg-gold': '#C5A059',
+                        'gpg-cream': '#F0EAD6',
+                        'gpg-text': '#1C2B39',
+                        'gpg-light': '#F9F9F9',
+                        'gpg-gray-bg': '#F4F6F8',
+                        'gpg-gray': '#64748b',
+                        
+                        // Old vars for compatibility
+                        'ph-blue-dark': '#0f172a',
+                        'ph-blue-primary': '#1e40af',
+                        'ph-blue-light': '#eff6ff',
+                        'ph-gray-bg': '#f8fafc',
+                        'ph-text-body': '#334155',
+                        'ph-text-muted': '#64748b',
+                        'ph-ink': '#1a1a1a',
+                        'ph-paper': '#f9f9f9',
+                        'ph-accent': '#2c5282',
+                        'ph-gold': '#a38f6d',
+                    },
+                    fontFamily: {
+                        brand: ['"Cinzel"', 'serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'widest-plus': '0.25em',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #334155; }
+        h1, h2, h3 { font-family: 'Noto Serif TC', serif; }
+        
+        .table-row-hover:hover td { background-color: #f8fafc; }
+        .modal { opacity: 0; pointer-events: none; transition: all 0.3s ease-in-out; z-index: 100; }
+        .modal.active { opacity: 1; pointer-events: auto; }
+        
+        /* Logo Sizing */
+        .nav-logo { height: 90px; width: auto; } 
+        .footer-logo { height: 90px; width: auto; }
+        
+        @media (max-width: 768px) {
+            .nav-logo { height: 60px; }
+            .footer-logo { height: 50px; }
+        }
+        
+        /* GPG Gradient Text */
+        .gold-gradient {
+            background: linear-gradient(135deg, #C5A059 0%, #9A7B3A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gpg-navy selection:text-gpg-gold">
+
+<nav class="fixed w-full z-50 border-b border-gray-200/50 transition-all duration-300" id="navbar" style="background-color: #fdfdfd;">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-32">
+                
+                <a href="index.html" class="flex items-center group relative z-50 py-1">
+                    <img src="Logo 2.png" alt="Graduate Planning Group" class="nav-logo object-contain transition transform group-hover:scale-105 duration-300">
+                </a>
+                
+                <div class="hidden lg:flex space-x-1 text-sm font-bold tracking-wide items-center text-gpg-navy relative z-50">
+                    <a href="is-business-right-for-me.html" class="flex items-center text-gpg-gray hover:text-gpg-navy hover:bg-gray-100 transition py-2 px-4 rounded-sm group">
+                        <i data-lucide="compass" class="w-4 h-4 mr-2 text-gpg-gold"></i>
+                        適性落點診斷
+                    </a>
+                    
+                    <a href="mentors.html" class="hover:text-gpg-gold transition py-6 px-3">顧問陣容</a>
+                    <a href="results.html" class="hover:text-gpg-gold transition py-6 px-3">錄取榜單</a>
+                    
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">
+                            服務項目 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-64 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="services.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="block font-bold">國內頂大推甄</span>
+                                <span class="text-xs text-gray-400">台大財金、商研、國企</span>
+                            </a>
+                            <a href="overseas.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100 relative">
+                                <span class="block font-bold text-gpg-gold">海外留學申請 <span class="bg-gpg-navy text-white text-[9px] px-1.5 py-0.5 rounded ml-1">NEW</span></span>
+                                <span class="text-xs text-gray-400">Oxford, UPenn, Ivy League</span>
+                            </a>
+                            <a href="intern.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">實習職涯諮詢</span>
+                                <span class="text-xs text-gray-400">履歷精修、模擬面試</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative group px-3">
+                        <button class="flex items-center text-gpg-navy font-bold border-b-2 border-gpg-gold/20 transition py-6 focus:outline-none">
+                            獨家資源 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-56 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="faq.html" class="block px-6 py-4 text-gpg-navy bg-gray-50 font-bold border-b border-gray-100">
+                                <span class="block">推甄百科 FAQ</span>
+                            </a>
+                            <a href="resources.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">精選乾貨文章</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="pl-4 ml-2 border-l border-gray-300">
+                        <a href="index.html#contact" class="bg-gpg-navy text-white px-6 py-2.5 rounded-sm text-sm font-brand tracking-wider hover:bg-gpg-gold transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            CONSULT
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gpg-navy hover:text-gpg-gold focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-32 left-0 w-full border-b border-gray-200 shadow-xl h-[calc(100vh-128px)] overflow-y-auto z-40" style="background-color: #fdfdfd;">
+            <div class="flex flex-col p-6 space-y-6">
+                <a href="is-business-right-for-me.html" class="text-xl font-bold text-gpg-navy flex items-center py-2 border-b border-gray-300/50"><i data-lucide="compass" class="w-6 h-6 mr-2 text-gpg-gold"></i> 適性落點診斷</a>
+                <a href="mentors.html" class="block text-lg font-bold text-gray-700">顧問陣容</a>
+                <a href="results.html" class="block text-lg font-bold text-gray-700">錄取榜單</a>
+                
+                <div class="border-l-4 border-gpg-gold pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Services</span>
+                    <a href="services.html" class="block text-lg font-bold text-gray-700 mb-2">國內推甄服務</a>
+                    <a href="overseas.html" class="block text-lg font-bold text-gpg-gold mb-2">海外留學申請</a>
+                    <a href="intern.html" class="block text-lg font-bold text-gray-700">實習諮詢</a>
+                </div>
+
+                <div class="border-l-4 border-gray-300 pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Resources</span>
+                    <a href="faq.html" class="block text-lg font-bold text-gpg-navy mb-2">推甄百科 FAQ</a>
+                    <a href="resources.html" class="block text-lg font-bold text-gray-700">精選乾貨文章</a>
+                </div>
+
+                <a href="index.html#contact" class="block w-full bg-gpg-navy text-white text-center py-4 rounded-sm font-bold shadow-lg mt-4">立即預約免費評估</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <header class="pt-40 pb-20 bg-gpg-gray-bg text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <span class="text-gpg-gold font-bold tracking-widest text-xs uppercase mb-4 block font-brand">Proven Track Record</span>
+            <h1 class="text-4xl md:text-5xl font-bold text-gpg-navy mb-6 font-serif">2025 年度錄取戰績</h1>
+            <p class="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+                數據會說話。這些不僅僅是榜單，更是我們與學員共同奮鬥的證明。<br>
+                專注台政頂尖系所與海外名校，我們協助你突破背景限制。
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+                <div class="p-6 bg-gpg-gray-bg rounded-sm text-center border border-gray-100">
+                    <div class="text-3xl font-bold text-gpg-navy mb-1 font-brand">100%</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">台大一階通過率</div>
+                </div>
+                <div class="p-6 bg-gpg-gray-bg rounded-sm text-center border border-gray-100">
+                    <div class="text-3xl font-bold text-gpg-navy mb-1 font-brand">7</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">台大正取錄取</div>
+                </div>
+                <div class="p-6 bg-gpg-gray-bg rounded-sm text-center border border-gray-100">
+                    <div class="text-3xl font-bold text-gpg-navy mb-1 font-brand">Top 3</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">學員囊括前三志願</div>
+                </div>
+                <div class="p-6 bg-gpg-gray-bg rounded-sm text-center border border-gray-100">
+                    <div class="text-3xl font-bold text-gpg-navy mb-1 font-brand">8</div>
+                    <div class="text-xs text-gray-500 uppercase tracking-wider">總錄取人數 (持續更新)</div>
+                </div>
+            </div>
+
+            <div class="mb-20">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-bold text-gpg-navy mb-2 font-serif">實力見證：錄取通知書牆</h2>
+                    <p class="text-sm text-gray-500">這是一部分學員的喜悅分享，下一張就是你的。</p>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="openModal('offer-1')">
+                        <img src="https://i.postimg.cc/2jhvmhqx/bai-hao-jia-zu.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="台大財金甲">
+                        <div class="absolute inset-0 bg-gpg-navy/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="text-gpg-gold font-bold tracking-widest text-sm border border-gpg-gold px-3 py-1 font-brand">台大財金甲</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="openModal('offer-2')">
+                        <img src="https://i.postimg.cc/SKkQ6bTR/pei-ru-guo-qi.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="台大國企">
+                        <div class="absolute inset-0 bg-gpg-navy/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="text-gpg-gold font-bold tracking-widest text-sm border border-gpg-gold px-3 py-1 font-brand">台大國企</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="openModal('offer-3')">
+                        <img src="https://i.postimg.cc/8CNkRgKV/shao-hua-shang-yan.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="台大商研">
+                        <div class="absolute inset-0 bg-gpg-navy/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="text-gpg-gold font-bold tracking-widest text-sm border border-gpg-gold px-3 py-1 font-brand">台大商研</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="openModal('offer-4')">
+                        <img src="https://i.postimg.cc/zfQWDkFq/bai-hao-yi-zu.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="台大財金乙">
+                        <div class="absolute inset-0 bg-gpg-navy/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="text-gpg-gold font-bold tracking-widest text-sm border border-gpg-gold px-3 py-1 font-brand">台大財金乙</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="openModal('offer-5')">
+                        <img src="https://i.postimg.cc/tgpR3GSs/pei-ru-jia-zu.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="台大財金甲">
+                        <div class="absolute inset-0 bg-gpg-navy/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="text-gpg-gold font-bold tracking-widest text-sm border border-gpg-gold px-3 py-1 font-brand">台大財金甲</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="openModal('offer-6')">
+                        <img src="https://i.postimg.cc/v8f9Mf13/bai-hao-guo-qi.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="台大國企">
+                        <div class="absolute inset-0 bg-gpg-navy/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="text-gpg-gold font-bold tracking-widest text-sm border border-gpg-gold px-3 py-1 font-brand">台大國企</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="openModal('offer-7')">
+                        <img src="https://i.postimg.cc/N0BG6vNZ/shao-hua-jia-zu.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-100" alt="台大財金甲">
+                        <div class="absolute inset-0 bg-gpg-navy/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="text-gpg-gold font-bold tracking-widest text-sm border border-gpg-gold px-3 py-1 font-brand">台大財金甲</span>
+                        </div>
+                    </div>
+                    <div class="relative group aspect-[3/4] overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="openModal('offer-8')">
+                        <img src="https://i.postimg.cc/QMhNQZ49/bai-hao-zheng-da-cai-gong.png" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="政大財工">
+                        <div class="absolute inset-0 bg-gpg-navy/70 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
+                            <span class="text-gpg-gold font-bold tracking-widest text-sm border border-gpg-gold px-3 py-1 font-brand">政大財工</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-hidden border border-gray-200 rounded-sm shadow-lg bg-white">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse whitespace-nowrap md:whitespace-normal">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-widest border-b border-gray-200">
+                                <th class="p-6 font-bold">錄取校系</th>
+                                <th class="p-6 font-bold">錄取結果</th>
+                                <th class="p-6 font-bold">畢業學校</th>
+                                <th class="p-6 font-bold">GPA / 系排</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 bg-white text-sm">
+                            <tr class="table-row-hover transition duration-200">
+                                <td class="p-6">
+                                    <div class="font-bold text-gpg-navy text-base">台大 財務金融所</div>
+                                    <div class="text-xs text-gray-500 mt-1">甲組 (財務金融)</div>
+                                </td>
+                                <td class="p-6"><span class="text-gpg-navy font-bold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">正取 2</span></td>
+                                <td class="p-6 text-gray-600">政治大學 財管系</td>
+                                <td class="p-6 text-gray-600">4.1 / 1%</td>
+                            </tr>
+                            <tr class="table-row-hover transition duration-200">
+                                <td class="p-6">
+                                    <div class="font-bold text-gpg-navy text-base">台大 國際企業所</div>
+                                    <div class="text-xs text-gray-500 mt-1">乙組 (行銷/策略)</div>
+                                </td>
+                                <td class="p-6"><span class="text-gpg-navy font-bold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">正取</span></td>
+                                <td class="p-6 text-gray-600">成功大學 國企系</td>
+                                <td class="p-6 text-gray-600">4.0 / 5%</td>
+                            </tr>
+                            <tr class="table-row-hover transition duration-200">
+                                <td class="p-6">
+                                    <div class="font-bold text-gpg-navy text-base">台大 商學研究所</div>
+                                    <div class="text-xs text-gray-500 mt-1">科技管理組</div>
+                                </td>
+                                <td class="p-6"><span class="text-gpg-navy font-bold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">正取</span></td>
+                                <td class="p-6 text-gray-600">中央大學 企管系</td>
+                                <td class="p-6 text-gray-600">3.9 / 10%</td>
+                            </tr>
+                            <tr class="table-row-hover transition duration-200">
+                                <td class="p-6">
+                                    <div class="font-bold text-gpg-navy text-base">台大 財務金融所</div>
+                                    <div class="text-xs text-gray-500 mt-1">乙組 (財務工程)</div>
+                                </td>
+                                <td class="p-6"><span class="text-gpg-navy font-bold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">正取</span></td>
+                                <td class="p-6 text-gray-600">政治大學 財管系</td>
+                                <td class="p-6 text-gray-600">4.1 / 1%</td>
+                            </tr>
+                            <tr class="table-row-hover transition duration-200">
+                                <td class="p-6">
+                                    <div class="font-bold text-gpg-navy text-base">台大 財務金融所</div>
+                                    <div class="text-xs text-gray-500 mt-1">甲組 (財務金融)</div>
+                                </td>
+                                <td class="p-6"><span class="text-gpg-navy font-bold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">正取</span></td>
+                                <td class="p-6 text-gray-600">成功大學 國企系</td>
+                                <td class="p-6 text-gray-600">4.0 / 5%</td>
+                            </tr>
+                            <tr class="table-row-hover transition duration-200">
+                                <td class="p-6">
+                                    <div class="font-bold text-gpg-navy text-base">台大 國際企業所</div>
+                                    <div class="text-xs text-gray-500 mt-1">乙組 (行銷/策略)</div>
+                                </td>
+                                <td class="p-6"><span class="text-gpg-navy font-bold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">正取</span></td>
+                                <td class="p-6 text-gray-600">政治大學 財管系</td>
+                                <td class="p-6 text-gray-600">4.1 / 1%</td>
+                            </tr>
+                            <tr class="table-row-hover transition duration-200">
+                                <td class="p-6">
+                                    <div class="font-bold text-gpg-navy text-base">台大 財務金融所</div>
+                                    <div class="text-xs text-gray-500 mt-1">甲組 (財務金融)</div>
+                                </td>
+                                <td class="p-6"><span class="text-gpg-navy font-bold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">正取</span></td>
+                                <td class="p-6 text-gray-600">中央大學 企管系</td>
+                                <td class="p-6 text-gray-600">3.9 / 10%</td>
+                            </tr>
+                            <tr class="table-row-hover transition duration-200">
+                                <td class="p-6">
+                                    <div class="font-bold text-gpg-navy text-base">政治大學 金融學系</div>
+                                    <div class="text-xs text-gray-500 mt-1">財務工程與金融科技</div>
+                                </td>
+                                <td class="p-6"><span class="text-gpg-navy font-bold bg-gray-100 px-3 py-1.5 rounded-full border border-gray-200">正取</span></td>
+                                <td class="p-6 text-gray-600">政治大學 財管系</td>
+                                <td class="p-6 text-gray-600">4.1 / 1%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mt-16 text-center">
+                <p class="text-gray-500 mb-6">想成為榜單上的下一位？</p>
+                <a href="index.html#contact" class="inline-block bg-gpg-navy text-white px-10 py-3 rounded-sm font-bold hover:bg-gpg-gold transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5 font-brand tracking-wider">
+                    立即預約落點分析
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gpg-navy text-white py-20 border-t border-gpg-gold/20 font-sans">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="space-y-8">
+                    <a href="index.html" class="block w-fit">
+                         <img src="Logo 1.png" alt="Graduate Planning Group" class="footer-logo object-contain">
+                    </a>
+                    <div class="text-gray-400 text-sm leading-8 text-justify border-l-2 border-gpg-gold/40 pl-6">
+                        <p class="mb-6 font-light opacity-90">
+                            「在追求頂尖的路上，孤獨是常態，但你不必獨自摸索。從台大管院到歐美名校，我們走過你要走的路，也犯過你可能會犯的錯。」
+                        </p>
+                        <p class="text-white font-medium">
+                            <span class="text-gpg-gold">Graduate Planning Group</span> 不做流水線的代辦，我們做你的「戰略合夥人」。陪你把學歷的天花板，變成職涯的起跑點。
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:pl-12 pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Quick Links</h3>
+                    <ul class="space-y-4 text-sm text-gray-400">
+                        <li><a href="results.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 2025 最新榜單</a></li>
+                        <li><a href="mentors.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 顧問團隊介紹</a></li>
+                        <li><a href="intern.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 實習諮詢</a></li>
+                        <li><a href="services.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 服務方案與價格</a></li>
+                        <li><a href="faq.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 推甄百科 FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Contact Us</h3>
+                    <div class="space-y-6 text-sm text-gray-400">
+                        <p class="flex items-start"><i data-lucide="map-pin" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 國立臺灣大學 管理學院<br>106 台北市大安區羅斯福路四段1號</p>
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> <a href="mailto:contact@gpg-consulting.com" class="hover:text-white transition">contact@gpg-consulting.com</a></p>
+                        <p class="flex items-center"><i data-lucide="message-circle" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 官方 LINE ID: @gpg_consulting</p>
+                    </div>
+                    <div class="mt-10">
+                        <h4 class="text-xs font-bold text-gray-500 mb-4">FOLLOW US</h4>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800/50 mt-16 pt-8 text-center md:text-left text-xs text-gray-500">
+                <p>&copy; 2025 Graduate Planning Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="modal-offer-1" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('offer-1')">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-10" onclick="closeModal('offer-1')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="bg-gpg-gray-bg p-8 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden border-4 border-white shadow-lg"><i data-lucide="user" class="w-full h-full p-4 text-gray-400"></i></div>
+                    <h3 class="font-serif font-bold text-xl text-gpg-navy">陳同學</h3>
+                    <p class="text-gpg-gold text-sm font-bold mb-6">錄取：台大財金甲組</p>
+                    <div class="w-full space-y-3 text-left text-sm text-gray-600">
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">本科</span><span class="font-bold">政大財管</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">關鍵</span><span class="font-bold">公司理財模型</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">結果</span><span class="font-bold">正取</span></div>
+                    </div>
+                </div>
+                <div class="col-span-2 p-8 md:p-10 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-6">跨組挑戰甲組<br>公司理財模型是關鍵</h2>
+                    <div class="space-y-8 text-gray-600">
+                        <div><h4 class="font-bold text-gpg-gold mb-2 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> 準備策略？</h4><p>我原本擅長的是財工，但為了增加上榜機率，決定同時挑戰甲組。顧問建議我將「ESG 分數」與「企業資本支出」做連結，這份研究計畫讓我在口試時完全主導了節奏。</p></div>
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h5 class="font-bold text-gpg-navy mb-4 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 真實錄取查核</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200"><img src="https://i.postimg.cc/2jhvmhqx/bai-hao-jia-zu.png" class="w-full h-auto rounded shadow-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-offer-2" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('offer-2')">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-10" onclick="closeModal('offer-2')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="bg-gpg-gray-bg p-8 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden border-4 border-white shadow-lg"><i data-lucide="user" class="w-full h-full p-4 text-gray-400"></i></div>
+                    <h3 class="font-serif font-bold text-xl text-gpg-navy">謝同學</h3>
+                    <p class="text-gpg-gold text-sm font-bold mb-6">錄取：台大國企所</p>
+                    <div class="w-full space-y-3 text-left text-sm text-gray-600">
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">本科</span><span class="font-bold">成大國企</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">關鍵</span><span class="font-bold">英文面試</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">結果</span><span class="font-bold">正取</span></div>
+                    </div>
+                </div>
+                <div class="col-span-2 p-8 md:p-10 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-6">英文面試高分過關<br>用邏輯征服教授</h2>
+                    <div class="space-y-8 text-gray-600">
+                        <div><h4 class="font-bold text-gpg-gold mb-2 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> 準備策略？</h4><p>我是非台大本科生，很擔心被歧視。Annie 學姊幫我特訓了「PREP」回答架構。不管是時事題還是個人經歷題，我都學會先講結論，再講原因。這讓我在面試時非常鎮定。</p></div>
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h5 class="font-bold text-gpg-navy mb-4 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 真實錄取查核</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200"><img src="https://i.postimg.cc/SKkQ6bTR/pei-ru-guo-qi.png" class="w-full h-auto rounded shadow-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-offer-3" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('offer-3')">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-10" onclick="closeModal('offer-3')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="bg-gpg-gray-bg p-8 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden border-4 border-white shadow-lg"><i data-lucide="user" class="w-full h-full p-4 text-gray-400"></i></div>
+                    <h3 class="font-serif font-bold text-xl text-gpg-navy">吳同學</h3>
+                    <p class="text-gpg-gold text-sm font-bold mb-6">錄取：台大商研所</p>
+                    <div class="w-full space-y-3 text-left text-sm text-gray-600">
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">本科</span><span class="font-bold">中央企管</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">關鍵</span><span class="font-bold">實習轉化</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">結果</span><span class="font-bold">正取</span></div>
+                    </div>
+                </div>
+                <div class="col-span-2 p-8 md:p-10 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-6">科管組正取<br>實習經驗轉化為學術價值</h2>
+                    <div class="space-y-8 text-gray-600">
+                        <div><h4 class="font-bold text-gpg-gold mb-2 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> 準備策略？</h4><p>顧問幫我把實習中遇到的「庫存管理問題」提煉成一個研究題目，並引用作業管理理論來分析。這讓教授覺得我不僅有實務經驗，還有將實務與理論結合的能力。</p></div>
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h5 class="font-bold text-gpg-navy mb-4 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 真實錄取查核</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200"><img src="https://i.postimg.cc/8CNkRgKV/shao-hua-shang-yan.png" class="w-full h-auto rounded shadow-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-offer-4" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('offer-4')">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-10" onclick="closeModal('offer-4')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="bg-gpg-gray-bg p-8 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden border-4 border-white shadow-lg"><i data-lucide="user" class="w-full h-full p-4 text-gray-400"></i></div>
+                    <h3 class="font-serif font-bold text-xl text-gpg-navy">陳同學</h3>
+                    <p class="text-gpg-gold text-sm font-bold mb-6">錄取：台大財金乙組</p>
+                    <div class="w-full space-y-3 text-left text-sm text-gray-600">
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">組別</span><span class="font-bold">財務工程</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">關鍵</span><span class="font-bold">Python 作品集</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">結果</span><span class="font-bold">正取</span></div>
+                    </div>
+                </div>
+                <div class="col-span-2 p-8 md:p-10 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-6">財工組正取攻略<br>作品集致勝</h2>
+                    <div class="space-y-8 text-gray-600">
+                        <div><h4 class="font-bold text-gpg-gold mb-2 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> 準備策略？</h4><p>我們將 GitHub 上的專案整理成「技術報告」，並在研究計畫中強調模型的改進創新點。這招非常有效，證明了我不只會寫 Code，還懂財務模型背後的數學原理。</p></div>
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h5 class="font-bold text-gpg-navy mb-4 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 真實錄取查核</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200"><img src="https://i.postimg.cc/zfQWDkFq/bai-hao-yi-zu.png" class="w-full h-auto rounded shadow-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-offer-5" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('offer-5')">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-10" onclick="closeModal('offer-5')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="bg-gpg-gray-bg p-8 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden border-4 border-white shadow-lg"><i data-lucide="user" class="w-full h-full p-4 text-gray-400"></i></div>
+                    <h3 class="font-serif font-bold text-xl text-gpg-navy">謝同學</h3>
+                    <p class="text-gpg-gold text-sm font-bold mb-6">錄取：台大財金甲組</p>
+                    <div class="w-full space-y-3 text-left text-sm text-gray-600">
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">本科</span><span class="font-bold">成大國企</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">關鍵</span><span class="font-bold">研究計畫</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">結果</span><span class="font-bold">正取</span></div>
+                    </div>
+                </div>
+                <div class="col-span-2 p-8 md:p-10 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-6">跨校逆襲甲組<br>紮實的研究邏輯</h2>
+                    <div class="space-y-8 text-gray-600">
+                        <div><h4 class="font-bold text-gpg-gold mb-2 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> 準備策略？</h4><p>從成大國企跨考台大財金，我非常擔心計量能力被質疑。顧問協助我針對「公司治理」撰寫了一份嚴謹的實證研究計畫，並補充了我在計量經濟學上的修課表現，成功說服教授。</p></div>
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h5 class="font-bold text-gpg-navy mb-4 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 真實錄取查核</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200"><img src="https://i.postimg.cc/tgpR3GSs/pei-ru-jia-zu.png" class="w-full h-auto rounded shadow-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-offer-6" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('offer-6')">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-10" onclick="closeModal('offer-6')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="bg-gpg-gray-bg p-8 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden border-4 border-white shadow-lg"><i data-lucide="user" class="w-full h-full p-4 text-gray-400"></i></div>
+                    <h3 class="font-serif font-bold text-xl text-gpg-navy">陳同學</h3>
+                    <p class="text-gpg-gold text-sm font-bold mb-6">錄取：台大國企所</p>
+                    <div class="w-full space-y-3 text-left text-sm text-gray-600">
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">本科</span><span class="font-bold">政大財管</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">關鍵</span><span class="font-bold">個人品牌</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">結果</span><span class="font-bold">正取</span></div>
+                    </div>
+                </div>
+                <div class="col-span-2 p-8 md:p-10 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-6">國企所面試攻略<br>差異化的個人品牌</h2>
+                    <div class="space-y-8 text-gray-600">
+                        <div><h4 class="font-bold text-gpg-gold mb-2 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> 準備策略？</h4><p>在國企所的面試中，我強調了自己「懂財務的行銷人」這一定位。不同於傳統商管學生，我展示了如何用財務數據來支持行銷決策，這個差異化定位讓教授印象深刻。</p></div>
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h5 class="font-bold text-gpg-navy mb-4 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 真實錄取查核</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200"><img src="https://i.postimg.cc/v8f9Mf13/bai-hao-guo-qi.png" class="w-full h-auto rounded shadow-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-offer-7" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('offer-7')">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-10" onclick="closeModal('offer-7')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="bg-gpg-gray-bg p-8 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden border-4 border-white shadow-lg"><i data-lucide="user" class="w-full h-full p-4 text-gray-400"></i></div>
+                    <h3 class="font-serif font-bold text-xl text-gpg-navy">吳同學</h3>
+                    <p class="text-gpg-gold text-sm font-bold mb-6">錄取：台大財金甲組</p>
+                    <div class="w-full space-y-3 text-left text-sm text-gray-600">
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">本科</span><span class="font-bold">中央企管</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">關鍵</span><span class="font-bold">總經分析</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">結果</span><span class="font-bold">正取</span></div>
+                    </div>
+                </div>
+                <div class="col-span-2 p-8 md:p-10 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-6">雙榜錄取攻略<br>展現跨領域的彈性</h2>
+                    <div class="space-y-8 text-gray-600">
+                        <div><h4 class="font-bold text-gpg-gold mb-2 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> 準備策略？</h4><p>雖然我是企管系，但我對總體經濟非常有興趣。在備審中，我附上了一份自己撰寫的「全球通膨趨勢分析報告」。這讓財金所教授看到我雖然不是財金本系，但具備紮實的市場分析能力。</p></div>
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h5 class="font-bold text-gpg-navy mb-4 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 真實錄取查核</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200"><img src="https://i.postimg.cc/N0BG6vNZ/shao-hua-jia-zu.png" class="w-full h-auto rounded shadow-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="modal-offer-8" class="modal fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm hidden" onclick="closeModal('offer-8')">
+        <div class="bg-white w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl relative" onclick="event.stopPropagation()">
+            <button class="absolute top-4 right-4 text-gray-500 hover:text-black z-10" onclick="closeModal('offer-8')"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div class="grid grid-cols-1 md:grid-cols-3">
+                <div class="bg-gpg-gray-bg p-8 flex flex-col items-center text-center">
+                    <div class="w-24 h-24 rounded-full bg-gray-200 mb-4 overflow-hidden border-4 border-white shadow-lg"><i data-lucide="user" class="w-full h-full p-4 text-gray-400"></i></div>
+                    <h3 class="font-serif font-bold text-xl text-gpg-navy">陳同學</h3>
+                    <p class="text-gpg-gold text-sm font-bold mb-6">錄取：政大財工組</p>
+                    <div class="w-full space-y-3 text-left text-sm text-gray-600">
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">錄取別</span><span class="font-bold">正取第 8 名</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">關鍵</span><span class="font-bold">程式交易</span></div>
+                        <div class="bg-white p-3 rounded shadow-sm"><span class="block text-xs text-gray-400 uppercase">結果</span><span class="font-bold">正取</span></div>
+                    </div>
+                </div>
+                <div class="col-span-2 p-8 md:p-10 leading-relaxed">
+                    <h2 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-6">政大財工攻略<br>技術實力的展現</h2>
+                    <div class="space-y-8 text-gray-600">
+                        <div><h4 class="font-bold text-gpg-gold mb-2 flex items-center"><i data-lucide="help-circle" class="w-4 h-4 mr-2"></i> 準備策略？</h4><p>政大財工非常看重實作。我直接帶著筆電去面試，展示我寫的選擇權定價模型程式碼。這個舉動直接證明了我的即戰力，讓我在眾多考生中脫穎而出。</p></div>
+                        <div class="mt-8 border-t border-gray-200 pt-6">
+                            <h5 class="font-bold text-gpg-navy mb-4 flex items-center"><i data-lucide="award" class="w-5 h-5 mr-2 text-gpg-gold"></i> 真實錄取查核</h5>
+                            <div class="bg-gray-100 rounded-lg p-4 border border-gray-200"><img src="https://i.postimg.cc/QMhNQZ49/bai-hao-zheng-da-cai-gong.png" class="w-full h-auto rounded shadow-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        lucide.createIcons();
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                menu.classList.toggle('flex');
+            });
+        }
+        
+        function openModal(id) {
+            const modal = document.getElementById('modal-' + id);
+            if (modal) {
+                modal.classList.remove('hidden');
+                setTimeout(() => { modal.classList.add('active'); }, 10);
+                document.body.style.overflow = 'hidden';
+            }
+        }
+        function closeModal(id) {
+            const modal = document.getElementById('modal-' + id);
+            if (modal) {
+                modal.classList.remove('active');
+                setTimeout(() => { modal.classList.add('hidden'); }, 300);
+                document.body.style.overflow = 'auto';
+            }
+        }
+    </script>
+</body>
+</html>
