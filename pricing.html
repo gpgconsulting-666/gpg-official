@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LVGHBKCVL0"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-LVGHBKCVL0');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>方案戰略與定價 - Graduate Planning Group</title>
+    <meta name="theme-color" content="#fdfdfd">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Serif+TC:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'gpg-navy': '#16284d',
+                        'gpg-gold': '#C5A059',
+                        'gpg-cream': '#F0EAD6',
+                        'gpg-text': '#1C2B39',
+                        'gpg-light': '#F9F9F9',
+                        'gpg-gray-bg': '#F4F6F8',
+                    },
+                    fontFamily: {
+                        brand: ['"Cinzel"', 'serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #334155; }
+        h1, h2, h3, h4 { font-family: 'Noto Serif TC', serif; }
+        .nav-logo { height: 90px; width: auto; } 
+        .footer-logo { height: 90px; width: auto; }
+        @media (max-width: 768px) {
+            .nav-logo { height: 60px; }
+            .footer-logo { height: 50px; }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gpg-navy selection:text-gpg-gold">
+
+    <nav class="fixed w-full z-50 border-b border-gray-200/50 transition-all duration-300 bg-[#fdfdfd] backdrop-blur-md" id="navbar">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center h-32">
+                
+                <a href="index.html" class="flex items-center group relative z-50 py-1">
+                    <img src="Logo 2.png" alt="Graduate Planning Group" class="nav-logo object-contain transition transform group-hover:scale-105 duration-300">
+                </a>
+                
+                <div class="hidden lg:flex space-x-1 text-sm font-bold tracking-wide items-center text-gpg-navy relative z-50">
+                    <a href="is-business-right-for-me.html" class="flex items-center text-gpg-gray hover:text-gpg-navy hover:bg-gray-100 transition py-2 px-4 rounded-sm group">
+                        <i data-lucide="compass" class="w-4 h-4 mr-2 text-gpg-gold"></i>
+                        適性落點診斷
+                    </a>
+                    
+                    <a href="mentors.html" class="hover:text-gpg-gold transition py-6 px-3">顧問陣容</a>
+                    <a href="results.html" class="hover:text-gpg-gold transition py-6 px-3">錄取榜單</a>
+                    
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">
+                            服務項目 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-64 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="services.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="block font-bold">國內頂大推甄</span>
+                                <span class="text-xs text-gray-400">台大財金、商研、國企</span>
+                            </a>
+                            <a href="overseas.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100 relative">
+                                <span class="block font-bold text-gpg-gold">海外留學申請 <span class="bg-gpg-navy text-white text-[9px] px-1.5 py-0.5 rounded ml-1">NEW</span></span>
+                                <span class="text-xs text-gray-400">Oxford, UPenn, Ivy League</span>
+                            </a>
+                            <a href="intern.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="block font-bold">實習職涯諮詢</span>
+                                <span class="text-xs text-gray-400">履歷精修、模擬面試</span>
+                            </a>
+                            <a href="pricing.html" class="block px-6 py-4 bg-gpg-navy text-white hover:bg-gpg-gold transition text-center">
+                                <span class="block font-bold tracking-wider">全方位戰略方案</span>
+                                <span class="text-[10px] text-gray-300">雙軌制霸 ＆ 價格總覽</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="relative group px-3">
+                        <button class="flex items-center hover:text-gpg-gold transition py-6 focus:outline-none">
+                            獨家資源 <i data-lucide="chevron-down" class="ml-1 w-4 h-4 group-hover:rotate-180 transition-transform duration-300"></i>
+                        </button>
+                        <div class="absolute left-0 top-full w-56 bg-white shadow-xl border-t-2 border-gpg-gold opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-50 rounded-b-sm overflow-hidden">
+                            <a href="faq.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition border-b border-gray-100">
+                                <span class="block font-bold">推甄百科 FAQ</span>
+                            </a>
+                            <a href="resources.html" class="block px-6 py-4 text-gray-600 hover:text-gpg-navy hover:bg-gray-50 transition">
+                                <span class="block font-bold">精選乾貨文章</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="pl-4 ml-2 border-l border-gray-300">
+                        <a href="index.html#contact" class="bg-gpg-navy text-white px-6 py-2.5 rounded-sm text-sm font-brand tracking-wider hover:bg-gpg-gold transition shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                            CONSULT
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lg:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gpg-navy hover:text-gpg-gold focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mobile-menu" class="hidden lg:hidden absolute top-32 left-0 w-full border-b border-gray-200 shadow-xl h-[calc(100vh-128px)] overflow-y-auto z-40" style="background-color: #fdfdfd;">
+            <div class="flex flex-col p-6 space-y-6">
+                <a href="is-business-right-for-me.html" class="text-xl font-bold text-gpg-navy flex items-center py-2 border-b border-gray-300/50"><i data-lucide="compass" class="w-6 h-6 mr-2 text-gpg-gold"></i> 適性落點診斷</a>
+                <a href="mentors.html" class="block text-lg font-bold text-gray-700">顧問陣容</a>
+                <a href="results.html" class="block text-lg font-bold text-gray-700">錄取榜單</a>
+                
+                <div class="border-l-4 border-gpg-gold pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Services</span>
+                    <a href="services.html" class="block text-lg font-bold text-gray-700 mb-2">國內推甄服務</a>
+                    <a href="overseas.html" class="block text-lg font-bold text-gpg-gold mb-2">海外留學申請</a>
+                    <a href="intern.html" class="block text-lg font-bold text-gray-700 mb-2">實習諮詢</a>
+                    <a href="pricing.html" class="block text-lg font-bold text-gpg-navy bg-blue-50 px-2 py-1 -ml-2 rounded">方案與戰略總覽</a>
+                </div>
+
+                <div class="border-l-4 border-gray-300 pl-4">
+                    <span class="block text-sm text-gray-400 uppercase tracking-widest mb-2">Resources</span>
+                    <a href="faq.html" class="block text-lg font-bold text-gpg-navy mb-2">推甄百科 FAQ</a>
+                    <a href="resources.html" class="block text-lg font-bold text-gray-700">精選乾貨文章</a>
+                </div>
+
+                <a href="index.html#contact" class="block w-full bg-gpg-navy text-white text-center py-4 rounded-sm font-bold shadow-lg mt-4">立即預約免費評估</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-40 pb-16 bg-gpg-gray-bg text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <span class="text-gpg-gold font-bold tracking-widest text-sm uppercase mb-4 block font-brand">Pricing & Strategy</span>
+            <h1 class="text-4xl md:text-5xl font-bold text-gpg-navy mb-6 font-serif">不只是價格，更是<br>你的人生戰略佈局</h1>
+            <p class="text-gray-600 text-lg">
+                從「單點突破」到「雙軌制霸」。<br>
+                我們針對不同背景的學生，規劃了五種升學戰略路徑。
+            </p>
+        </div>
+    </header>
+
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                
+                <div class="bg-white rounded-2xl shadow-xl border border-gpg-gold/40 overflow-hidden relative group hover:-translate-y-1 transition duration-300">
+                    <div class="absolute top-0 right-0 bg-gpg-gold text-white text-xs font-bold px-3 py-1 rounded-bl-lg shadow-sm z-10">RECOMMENDED</div>
+                    <div class="p-8 md:p-10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-3 bg-gpg-navy/5 rounded-lg text-gpg-navy"><i data-lucide="globe-2" class="w-8 h-8"></i></div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-gpg-navy font-serif">雙軌制霸方案</h3>
+                                <p class="text-sm text-gray-500">國內頂大推甄 ＋ 海外名校申請</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-8 italic border-l-4 border-gpg-gold pl-4 py-1">
+                            「不做選擇，我全都要。進可攻歐美名校，退可守台政頂大。」
+                        </p>
+                        
+                        <div class="bg-gpg-gray-bg p-4 rounded-lg mb-8">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i data-lucide="check" class="w-4 h-4 text-gpg-gold shrink-0 mr-3 mt-1"></i>
+                                    <span class="text-sm text-gray-700"><strong>經歷效益最大化：</strong>一份實習，兩種包裝 (學術風 vs 職涯風)。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check" class="w-4 h-4 text-gpg-gold shrink-0 mr-3 mt-1"></i>
+                                    <span class="text-sm text-gray-700"><strong>分散風險：</strong>適合 GPA 優秀且有語言能力，想衝 Ivy/G5 但需要台大當後盾的玩家。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check" class="w-4 h-4 text-gpg-gold shrink-0 mr-3 mt-1"></i>
+                                    <span class="text-sm text-gray-700"><strong>全套文書：</strong>中文研究計畫 + 英文 SOP/CV 極致潤飾。</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a href="#contact" class="block w-full text-center bg-gpg-navy text-white py-4 rounded-lg font-bold hover:bg-gpg-gold transition shadow-md">
+                            諮詢雙軌報價
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden relative group hover:-translate-y-1 transition duration-300">
+                    <div class="p-8 md:p-10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-3 bg-blue-50 rounded-lg text-blue-800"><i data-lucide="shield-check" class="w-8 h-8"></i></div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-gpg-navy font-serif">考試保險方案</h3>
+                                <p class="text-sm text-gray-500">國內推甄 ＋ 筆試入學輔導</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 mb-8 italic border-l-4 border-blue-200 pl-4 py-1">
+                            「為考試買保險。先推甄卡位，若不滿意再拚考試，心態更穩。」
+                        </p>
+                        
+                        <div class="bg-gray-50 p-4 rounded-lg mb-8">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mr-3 mt-1"></i>
+                                    <span class="text-sm text-gray-700"><strong>兩階段護航：</strong>9-11月衝推甄，二月筆試後無縫接軌面試輔導。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mr-3 mt-1"></i>
+                                    <span class="text-sm text-gray-700"><strong>資料庫共用：</strong>推甄素材直接沿用至考試二階，省時省力。</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i data-lucide="check" class="w-4 h-4 text-blue-600 shrink-0 mr-3 mt-1"></i>
+                                    <span class="text-sm text-gray-700"><strong>適合中上段班：</strong>成績不錯 (15-30%) 但怕推甄不穩的避險策略。</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <a href="#contact" class="block w-full text-center border-2 border-gpg-navy text-gpg-navy py-4 rounded-lg font-bold hover:bg-gpg-navy hover:text-white transition">
+                            諮詢保險方案
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <div class="bg-white rounded-xl shadow border border-gray-100 p-6 flex flex-col hover:shadow-lg transition">
+                    <div class="mb-4"><span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded uppercase">Domestic</span></div>
+                    <h3 class="text-xl font-bold text-gpg-navy font-serif mb-2">頂大推甄專攻</h3>
+                    <p class="text-xs text-gray-500 mb-6">目標：台大、政大、清交成</p>
+                    <ul class="space-y-2 mb-8 flex-1 text-sm text-gray-600">
+                        <li class="flex"><i data-lucide="chevron-right" class="w-4 h-4 text-gpg-gold mr-1"></i> 學術邏輯研究計畫</li>
+                        <li class="flex"><i data-lucide="chevron-right" class="w-4 h-4 text-gpg-gold mr-1"></i> 歷屆真實面試題庫</li>
+                    </ul>
+                    <a href="services.html" class="block w-full text-center bg-gray-50 border border-gray-200 text-gray-600 py-3 rounded font-bold text-sm hover:bg-gpg-navy hover:text-white transition">
+                        查看國內詳情 →
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-xl shadow border border-gray-100 p-6 flex flex-col hover:shadow-lg transition">
+                    <div class="mb-4"><span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded uppercase">Overseas</span></div>
+                    <h3 class="text-xl font-bold text-gpg-navy font-serif mb-2">海外留學專攻</h3>
+                    <p class="text-xs text-gray-500 mb-6">目標：美國 Ivy/M7、英國 G5</p>
+                    <ul class="space-y-2 mb-8 flex-1 text-sm text-gray-600">
+                        <li class="flex"><i data-lucide="chevron-right" class="w-4 h-4 text-gpg-gold mr-1"></i> SOP 故事線挖掘</li>
+                        <li class="flex"><i data-lucide="chevron-right" class="w-4 h-4 text-gpg-gold mr-1"></i> 外商級 CV 精修</li>
+                    </ul>
+                    <a href="overseas.html" class="block w-full text-center bg-gray-50 border border-gray-200 text-gray-600 py-3 rounded font-bold text-sm hover:bg-gpg-navy hover:text-white transition">
+                        查看留學詳情 →
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-xl shadow border border-gray-100 p-6 flex flex-col hover:shadow-lg transition">
+                    <div class="mb-4"><span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-1 rounded uppercase">Early Bird</span></div>
+                    <h3 class="text-xl font-bold text-gpg-navy font-serif mb-2">實習與早期佈局</h3>
+                    <p class="text-xs text-gray-500 mb-6">對象：大二、大三學生</p>
+                    <ul class="space-y-2 mb-8 flex-1 text-sm text-gray-600">
+                        <li class="flex"><i data-lucide="chevron-right" class="w-4 h-4 text-gpg-gold mr-1"></i> GPA 選課救援</li>
+                        <li class="flex"><i data-lucide="chevron-right" class="w-4 h-4 text-gpg-gold mr-1"></i> 實習路徑規劃</li>
+                    </ul>
+                    <a href="intern.html" class="block w-full text-center bg-gray-50 border border-gray-200 text-gray-600 py-3 rounded font-bold text-sm hover:bg-gpg-navy hover:text-white transition">
+                        查看實習詳情 →
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gpg-gray-bg">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gpg-navy mb-4 font-serif">為什麼選擇 GPG？</h2>
+                <p class="text-gray-500">不走流水線，我們走精兵政策。以下是 GPG 與市面服務的差異比較。</p>
+            </div>
+
+            <div class="overflow-x-auto rounded-lg shadow-lg border border-gray-100 bg-white">
+                <table class="w-full text-left border-collapse min-w-[800px]">
+                    <thead>
+                        <tr class="bg-gpg-navy text-white text-lg font-serif">
+                            <th class="p-6 w-1/4">比較項目</th>
+                            <th class="p-6 w-1/4 bg-gpg-navy border-b-4 border-gpg-gold relative">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gpg-gold"></div>
+                                Graduate Planning Group
+                                <span class="block text-xs font-normal mt-1 opacity-80 font-sans">台大 x Ivy League 團隊</span>
+                            </th>
+                            <th class="p-6 w-1/4 bg-gray-800">傳統連鎖代辦</th>
+                            <th class="p-6 w-1/4 bg-gray-700">個人接案 / 蝦皮</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-base">
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-6 font-bold text-gray-700">顧問背景</td>
+                            <td class="p-6 text-gpg-navy font-bold bg-blue-50">100% 台大財金/商研 + 歐美名校</td>
+                            <td class="p-6 text-gray-500">多為文組兼職，非商管本科</td>
+                            <td class="p-6 text-gray-500">素質不一，難以查證</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-6 font-bold text-gray-700">研究計畫/SOP</td>
+                            <td class="p-6 text-gpg-navy font-bold bg-blue-50">碩博士級學術邏輯 + 故事包裝</td>
+                            <td class="p-6 text-gray-500">僅修飾文法，內容模板化</td>
+                            <td class="p-6 text-gray-500">視個人能力而定</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-6 font-bold text-gray-700">服務型態</td>
+                            <td class="p-6 text-gpg-navy font-bold bg-blue-50">戰略合夥 (含選課/實習建議)</td>
+                            <td class="p-6 text-gray-500">文書代工 (只負責填表)</td>
+                            <td class="p-6 text-gray-500">單次修改</td>
+                        </tr>
+                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                            <td class="p-6 font-bold text-gray-700">回覆速度</td>
+                            <td class="p-6 text-gpg-navy font-bold bg-blue-50">Line 群組即時戰情室</td>
+                            <td class="p-6 text-gray-500">E-mail 往返，需等 3-5 天</td>
+                            <td class="p-6 text-gray-500">不穩定，可能隨時消失</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-gpg-navy mb-8 font-serif">常見問題</h2>
+            <div class="space-y-6 text-left">
+                <div class="border border-gray-200 rounded-lg p-6">
+                    <h3 class="font-bold text-gpg-navy mb-2">Q: 諮詢需要費用嗎？</h3>
+                    <p class="text-gray-600">我們提供免費的「初步落點評估」。您可以填寫表單，顧問會針對您的背景進行可行性分析。若確定委託 GPG 進行輔導，才會收取正式方案費用。</p>
+                </div>
+                <div class="border border-gray-200 rounded-lg p-6">
+                    <h3 class="font-bold text-gpg-navy mb-2">Q: 我是大二學生，現在找你們會太早嗎？</h3>
+                    <p class="text-gray-600">完全不會。事實上，大二大三是黃金期。我們的「實習與早期佈局」方案就是專門協助您規劃 GPA 與實習路徑，這是大四能否進入頂尖名校的關鍵。</p>
+                </div>
+                <div class="border border-gray-200 rounded-lg p-6">
+                    <h3 class="font-bold text-gpg-navy mb-2">Q: 雙軌制霸方案適合什麼樣的人？</h3>
+                    <p class="text-gray-600">適合在校成績前 20-30%，有心想出國（例如美國 TOP 30 或英國 G5），但也希望能保留台大財金/商研作為職涯後路（保底）的同學。我們會最大化利用您的申請素材。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-24 bg-white relative border-b-8 border-gpg-gold text-center">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6 font-serif text-gpg-navy">不確定哪個戰略適合你？</h2>
+            <p class="text-gray-600 mb-8 text-lg">填寫表單，我們將根據您的 GPA、實習經歷與目標，<br>為您推薦勝率最高的申請路徑。</p>
+            
+            <a href="index.html#contact" class="inline-block bg-gpg-navy text-white font-bold text-lg px-8 py-4 rounded hover:bg-gpg-gold hover:text-gpg-navy transition transform hover:-translate-y-1 shadow-lg">
+                預約免費落點診斷
+            </a>
+            <p class="text-sm text-gray-400 mt-6">* 每日免費諮詢名額有限，建議盡早預約。</p>
+        </div>
+    </section>
+
+    <footer class="bg-gpg-navy text-white py-20 font-sans">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <div class="space-y-8">
+                    <a href="index.html" class="block w-fit"><img src="Logo 1.png" alt="Graduate Planning Group" class="footer-logo object-contain"></a>
+                    <div class="text-gray-400 text-sm leading-8 text-justify border-l-2 border-gpg-gold/40 pl-6">
+                        <p class="mb-6 font-light opacity-90">「在追求頂尖的路上,孤獨是常態,但你不必獨自摸索。從台大管院到歐美名校,我們走過你要走的路,也犯過你可能會犯的錯。」</p>
+                        <p class="text-white font-medium"><span class="text-gpg-gold">Graduate Planning Group</span> 不做流水線的代辦,我們做你的「戰略合夥人」。陪你把學歷的天花板,變成職涯的起跑點。</p>
+                    </div>
+                </div>
+                <div class="lg:pl-12 pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Quick Links</h3>
+                    <ul class="space-y-3 text-sm text-gray-400">
+                        <li><a href="results.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="trophy" class="w-3 h-3 mr-2 text-gpg-gold"></i> 2025 最新錄取榜單</a></li>
+                        <li><a href="mentors.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="users" class="w-3 h-3 mr-2"></i> 顧問團隊介紹</a></li>
+                        
+                        <li><a href="pricing.html" class="hover:text-white transition flex items-center font-bold text-gpg-gold"><i data-lucide="star" class="w-3 h-3 mr-2"></i> 全方位戰略與報價</a></li>
+                        <li><a href="services.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 國內頂大推甄服務</a></li>
+                        <li><a href="overseas.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 海外留學申請服務</a></li>
+                        <li><a href="intern.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="chevron-right" class="w-3 h-3 mr-2"></i> 實習與職涯佈局</a></li>
+                        
+                        <li><a href="is-business-right-for-me.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="compass" class="w-3 h-3 mr-2"></i> 免費適性落點診斷</a></li>
+                        <li><a href="faq.html" class="hover:text-gpg-gold transition flex items-center"><i data-lucide="help-circle" class="w-3 h-3 mr-2"></i> 推甄百科 FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="pt-4">
+                    <h3 class="text-xs font-brand font-bold tracking-widest uppercase text-gpg-gold mb-8">Contact Us</h3>
+                    <div class="space-y-6 text-sm text-gray-400">
+                        <p class="flex items-center"><i data-lucide="mail" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> <a href="mailto:contact@gpg-consulting.com" class="hover:text-white transition">contact@gpgconsultings.com</a></p>
+                        <p class="flex items-center"><i data-lucide="message-circle" class="w-5 h-5 mr-3 text-gpg-gold shrink-0"></i> 官方 LINE ID: @gpgconsultings</p>
+                    </div>
+                    <div class="mt-10">
+                        <h4 class="text-xs font-bold text-gray-500 mb-4">FOLLOW US</h4>
+                        <div class="flex space-x-3">
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="w-10 h-10 bg-gpg-navy border border-gray-700 rounded-full flex items-center justify-center text-gray-400 hover:border-gpg-gold hover:text-gpg-gold transition"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800/50 mt-16 pt-8 text-center md:text-left text-xs text-gray-500">
+                <p>&copy; 2025 Graduate Planning Group. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        if (btn && menu) {
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>

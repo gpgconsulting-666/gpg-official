@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <!-- Navy background for drama -->
+  <rect width="400" height="400" fill="#1a2940"/>
+  
+  <!-- Abstract flowing shapes representing global pathways -->
+  <path d="M 100 150 Q 150 120 200 150 Q 250 180 300 150" 
+        fill="none" stroke="#c9a961" stroke-width="3" stroke-linecap="round"/>
+  
+  <path d="M 100 180 Q 150 210 200 180 Q 250 150 300 180" 
+        fill="none" stroke="#c9a961" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  
+  <path d="M 100 210 Q 150 180 200 210 Q 250 240 300 210" 
+        fill="none" stroke="#c9a961" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  
+  <!-- Architectural accent elements -->
+  <circle cx="100" cy="150" r="4" fill="#c9a961"/>
+  <circle cx="300" cy="150" r="4" fill="#c9a961"/>
+  <circle cx="200" cy="150" r="5" fill="#ffffff"/>
+  
+  <!-- Contemporary typography -->
+  <text x="200" y="280" font-family="'Futura', 'Century Gothic', sans-serif" font-size="56" font-weight="500" fill="#ffffff" text-anchor="middle" letter-spacing="2">GPG</text>
+  
+  <!-- Thin gold line accent -->
+  <line x1="120" y1="300" x2="280" y2="300" stroke="#c9a961" stroke-width="0.5"/>
+  
+  <text x="200" y="325" font-family="'Helvetica Neue', sans-serif" font-size="11" font-weight="300" fill="#c9a961" text-anchor="middle" letter-spacing="4">ELITE CONSULTING</text>
+</svg>
