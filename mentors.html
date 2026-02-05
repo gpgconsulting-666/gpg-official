@@ -290,56 +290,53 @@
     </header>
 
     <section class="py-20 px-6 bg-white">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-7xl mx-auto flex flex-col items-center gap-10">
             
-            <div class="flex justify-center mb-10">
-                <div class="mentor-card group w-full max-w-5xl" onclick="openModal('albert')">
-                    <img src="Albert 2.jpg" alt="Albert" class="mentor-avatar w-36 h-36 md:w-48 md:h-48 flex-shrink-0"> 
-                    <div class="flex flex-col h-full justify-between w-full pl-4"> <div>
-                            <h3 class="text-2xl md:text-3xl font-serif font-bold text-gpg-navy mb-2 leading-tight mentor-name">Albert</h3> <p class="text-gpg-gold text-sm uppercase tracking-wider font-bold mb-3">Founder of GPG</p>
-                            <p class="text-gray-700 text-lg font-medium mb-1">台灣大學財務金融研究所</p> <p class="text-gray-400 text-sm">Taipei, Taiwan</p>
-                        </div>
-                        <div class="mt-6 pt-4 border-t border-gray-100 w-full flex justify-between items-center">
-                        </div>
+            <div class="mentor-card group w-full max-w-5xl" onclick="openModal('albert')">
+                <img src="Albert 2.jpg" alt="Albert" class="mentor-avatar w-32 h-32 md:w-48 md:h-48 flex-shrink-0"> 
+                <div class="flex flex-col h-full justify-between w-full pl-4 md:pl-8">
+                    <div>
+                        <h3 class="text-2xl md:text-4xl font-serif font-bold text-gpg-navy mb-2 leading-tight mentor-name">Albert</h3>
+                        <p class="text-gpg-gold text-sm uppercase tracking-wider font-bold mb-3">Founder of GPG</p>
+                        <p class="text-gray-700 text-lg md:text-xl font-medium mb-1">台灣大學財務金融研究所</p>
+                        <p class="text-gray-400 text-sm">Taipei, Taiwan</p>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-100 w-full flex justify-between items-center">
+                        <span class="text-xs font-bold text-gpg-navy opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest whitespace-nowrap ml-auto">View Profile <i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"></i></span>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-                
-                <div class="mentor-card group" onclick="openModal('andy')">
-                    <img src="andy.jpg" alt="Joseph" class="mentor-avatar">
-                    <div class="flex flex-col h-full justify-between w-full">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-gpg-navy mb-1 leading-tight mentor-name">Joseph</h3>
-                            <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-2">Senior Consultant</p>
-                            <p class="text-gray-700 text-sm font-medium mb-1">UPenn MSE in CIS</p>
-                            <p class="text-gray-400 text-xs">Philadelphia, USA</p>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-gray-100 w-full flex justify-between items-center">
-                            <i data-lucide="arrow-right" class="w-4 h-4 text-gpg-gray group-hover:text-gpg-gold transition-colors"></i>
-                            <span class="text-[10px] font-bold text-gpg-navy opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">View Profile</span>
-                        </div>
+            <div class="mentor-card group w-full max-w-5xl" onclick="openModal('andy')">
+                <img src="andy.jpg" alt="Joseph" class="mentor-avatar w-32 h-32 md:w-48 md:h-48 flex-shrink-0">
+                <div class="flex flex-col h-full justify-between w-full pl-4 md:pl-8">
+                    <div>
+                        <h3 class="text-2xl md:text-4xl font-serif font-bold text-gpg-navy mb-2 leading-tight mentor-name">Joseph</h3>
+                        <p class="text-gray-500 text-sm uppercase tracking-wider font-bold mb-3">Senior Consultant</p>
+                        <p class="text-gray-700 text-lg md:text-xl font-medium mb-1">UPenn MSE in CIS</p>
+                        <p class="text-gray-400 text-sm">Philadelphia, USA</p>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-100 w-full flex justify-between items-center">
+                        <span class="text-xs font-bold text-gpg-navy opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest whitespace-nowrap ml-auto">View Profile <i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"></i></span>
                     </div>
                 </div>
-
-                <div class="mentor-card group" onclick="openModal('annie')">
-                    <img src="annie.jpg" alt="Emily" class="mentor-avatar">
-                    <div class="flex flex-col h-full justify-between w-full">
-                        <div>
-                            <h3 class="text-xl font-serif font-bold text-gpg-navy mb-1 leading-tight mentor-name">Emily</h3>
-                            <p class="text-gray-500 text-xs uppercase tracking-wider font-semibold mb-2">Consultant</p>
-                            <p class="text-gray-700 text-sm font-medium mb-1">台灣大學財務金融研究所</p>
-                            <p class="text-gray-400 text-xs">Taipei, Taiwan</p>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-gray-100 w-full flex justify-between items-center">
-                            <i data-lucide="arrow-right" class="w-4 h-4 text-gpg-gray group-hover:text-gpg-gold transition-colors"></i>
-                            <span class="text-[10px] font-bold text-gpg-navy opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">View Profile</span>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
+            <div class="mentor-card group w-full max-w-5xl" onclick="openModal('annie')">
+                <img src="annie.jpg" alt="Emily" class="mentor-avatar w-32 h-32 md:w-48 md:h-48 flex-shrink-0">
+                <div class="flex flex-col h-full justify-between w-full pl-4 md:pl-8">
+                    <div>
+                        <h3 class="text-2xl md:text-4xl font-serif font-bold text-gpg-navy mb-2 leading-tight mentor-name">Emily</h3>
+                        <p class="text-gray-500 text-sm uppercase tracking-wider font-bold mb-3">Consultant</p>
+                        <p class="text-gray-700 text-lg md:text-xl font-medium mb-1">台灣大學財務金融研究所</p>
+                        <p class="text-gray-400 text-sm">Taipei, Taiwan</p>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-gray-100 w-full flex justify-between items-center">
+                        <span class="text-xs font-bold text-gpg-navy opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest whitespace-nowrap ml-auto">View Profile <i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"></i></span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
